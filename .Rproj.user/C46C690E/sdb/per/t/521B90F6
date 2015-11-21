@@ -1,0 +1,17 @@
+{
+    "contents" : "#' \n#' Function to process ENCODE data stored in BED file format.\n#' \nprocessEncodeMethProf <- function(methFile, rnaFile, hg19File=NULL, upstream=-100, \n                                  downstream=100, numCpG=10, sdThresh=0, \n                                  isDelChrom=FALSE, coverage=0){\n  \n  # Process RRBS file and return data in the required format\n  methData    <- readEncodeRRBS(file=methFile, \n                                isDelChrom=isDelChrom,\n                                coverage=coverage)\n  \n  # Read RNA-Seq BED file\n  rawRNAData  <- readEncodeRNASeq(file=rnaFile, \n                                  isDelChrom=isDelChrom)\n  if (!is.null(hg19File)){\n    # Read hg19 chromosome sizes file\n    chromSizes  <- readHg19ChromSizes(file=hg19File)\n  }else{\n    chromSizes  <- NULL\n  }\n  \n  # Read TSS BED file and return a promoter region x upstream \n  # and x downstream of Transcription Start Site\n  promData    <- genEncodeProm(data.raw=rawRNAData,\n                               chromSizes=chromSizes,\n                               upstream=upstream,\n                               downstream=downstream)\n  \n  # Find overlaps between promoter regions and RRBS data\n  overlaps    <- findOverlaps(query=promData, \n                              subject=methData, \n                              ignore.strand=FALSE)\n  \n  print(date())\n  # Generate data in the required format\n  dataObj     <- genPromRegionsData(promData=promData, \n                                    methData=methData, \n                                    overlaps=overlaps, \n                                    numCpG=numCpG, \n                                    sdThresh=sdThresh,\n                                    upstream=upstream, \n                                    downstream=downstream, \n                                    fmin=-1,  # Minimum value after data scaling\n                                    fmax=1)   # Maximum value after data scaling\n  print(date())\n  \n  encodeData              <- list()\n  encodeData$X            <- dataObj$X        # Processed RRBS data\n  #encodeData$methData     <- methData         # Methylation data\n  encodeData$promData     <- promData         # Promoter data\n  encodeData$promInd      <- dataObj$promInd  # Mapped Promoter indices \n  \n  class(encodeData) <- \"EncodeData\"\n  \n  rm(dataObj)\n  rm(methData)\n  rm(promData)\n  rm(rawRNAData)\n  rm(overlaps)\n  \n  return(encodeData)\n}\n",
+    "created" : 1448032868932.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2486881007",
+    "id" : "521B90F6",
+    "lastKnownWriteTime" : 1447871597,
+    "path" : "~/Documents/Code/ProcessHTSOLD/processEncodeMethProf.R",
+    "project_path" : null,
+    "properties" : {
+    },
+    "relative_order" : 4,
+    "source_on_save" : false,
+    "type" : "r_source"
+}

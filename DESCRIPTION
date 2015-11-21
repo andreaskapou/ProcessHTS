@@ -1,0 +1,18 @@
+Package: processHTS
+Type: Package
+Title: Process HTS Files and Data
+Version: 0.0.0.9000
+Date: 2015-11-19
+Author: person("C. A.", "Kapourani", email = "c.a.kapourani@sms.ed.ac.uk",
+                  role = c("aut", "cre"))
+Description: More about what it does (maybe more than one line)
+License: GPL-3
+Depends: R (>= 3.0.1)
+LazyData: TRUE
+RoxygenNote: 5.0.1
+Imports: GenomicRanges,
+    IRanges
+Suggests: knitr,
+    rmarkdown,
+    testthat
+VignetteBuilder: knitr
