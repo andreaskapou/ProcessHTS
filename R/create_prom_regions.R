@@ -61,7 +61,7 @@ create_prom_regions <- function(data, chrom_size = NULL, upstream = -100, downst
 
   # Create a GRanges object
   promoter_data <- GenomicRanges::GRanges(seqnames = prom[[1]],
-                      ranges    = IRanges(start = prom[[2]], end = prom[[3]]),
+                      ranges    = IRanges::IRanges(start = prom[[2]], end = prom[[3]]),
                       strand    = prom[[6]],
                       gene_id   = prom[[4]],
                       tss       = prom[[5]],
