@@ -39,7 +39,8 @@
 #' @seealso \code{\link{read.rnaseq}}, \code{\link{read.rrbs}}, \code{\link{create_prom_regions}}
 #'
 #' @export
-create_meth_regions <- function(rrbs_data, promoter_data, upstream, downstream, num_CpG = 0, sd_thresh = 0, fmin = -1, fmax = 1){
+create_meth_regions <- function(rrbs_data, promoter_data, upstream = -100, downstream = 100, 
+                                num_CpG = 0, sd_thresh = 0, fmin = -1, fmax = 1){
   assertthat::assert_that(is(rrbs_data, "GRanges"))
   assertthat::assert_that(is(promoter_data, "GRanges"))
   if (upstream > 0 ){
@@ -47,9 +48,9 @@ create_meth_regions <- function(rrbs_data, promoter_data, upstream, downstream, 
   }
 
   # Find overlaps between promoter regions and RRBS data
-  overlaps <- findOverlaps(query   = promoter_data,
-                           subject = rrbs_data,
-                           ignore.strand = FALSE)
+  overlaps <- GenomicRanges::findOverlaps(query   = promoter_data,
+                                          subject = rrbs_data,
+                                          ignore.strand = FALSE)
 
   if (length(overlaps) < 2){
     stop("Not enough matches between the RRBS data and RNA-Seq data. Check again the file names provided.")
