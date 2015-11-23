@@ -10,7 +10,8 @@
 #' @param fmin Optional minimum range value, default is 0.
 #' @param fmax Optional maximum range value, default is 1.
 #'
-#' @return The scaled data in the given range, default is between (0, 1).
+#' @return The scaled data in the given range, default is between (0, 1). If
+#'  xmin = xmax the input vector \code{data} is returned.
 #' @examples
 #' data <- c(-20, 0, 15, 20)
 #' scaled <- minmax_scaling(data)
@@ -23,8 +24,9 @@ minmax_scaling <- function(data, xmin = NULL, xmax = NULL, fmin = 0, fmax = 1){
   if (is.null(xmax)){
     xmax <- max(data)
   }
-  assert_that( (xmin - xmax) != 0)
-
+  if ( (xmin - xmax) == 0){
+    return(data)
+  }
   minmax <- (data - xmin) / (xmax - xmin)
   minmax_scaled <- minmax * (fmax - fmin) + fmin
 

@@ -2,15 +2,15 @@
 #'
 #' \code{create_prom_regions} creates promoter regions data using Transcription
 #' Start Sites (TSS) of RNA-Seq data as ground truth labels. Using the TSS
-#' data we create promoter regions \code{n} base pairs upstream and downstream
-#' of TSS. The RNA-Seq data should be a \code{\link{list}} object.
+#' data we create promoter regions \code{n} bps upstream and \code{m} bps
+#' downstream of TSS. The RNA-Seq data should be a \code{\link{list}} object.
 #'
 #' @param data List object containing the RNA-Seq data.
 #' @param chrom_size Optional data frame containing the chromosome sizes.
 #' @param upstream Integer defining the length of bps upstream of TSS.
 #' @param downstream Integer defining the length of bps downstream of TSS.
 #'
-#' @return the created promoters stored in a \code{\link[GenomicRanges]{GRanges}} object.
+#' @return The created promoters stored in a \code{\link[GenomicRanges]{GRanges}} object.
 #'
 #' @seealso \code{\link{read.rnaseq}}
 #'
@@ -20,8 +20,12 @@
 #' promoters <- create_prom_regions(data)
 #'
 #' @export
-create_prom_regions <- function(data, chrom_size = NULL, upstream = 100, downstream = 100){
+create_prom_regions <- function(data, chrom_size = NULL, upstream = -100, downstream = 100){
+  assertthat::assert_that(is.list(data))
   N <- length(data[[1]])  # Length of the dataset
+  if (upstream > 0 ){
+    upstream <- -upstream
+  }
 
   # Create list object for keeping unique promoter regions
   prom <- list()
@@ -36,7 +40,7 @@ create_prom_regions <- function(data, chrom_size = NULL, upstream = 100, downstr
   for (i in 1:N){
     # Depending on strand we change the regions upstream and downstream of TSS
     if (identical(data[[6]][i], "+")){
-      prom[[2]][i] <- max(0, data[[2]][i] - upstream)
+      prom[[2]][i] <- max(0, data[[2]][i] + upstream)
       if (is.null(chrom_size)){
         prom[[3]][i] <- data[[2]][i] + downstream
       }else{
@@ -46,9 +50,9 @@ create_prom_regions <- function(data, chrom_size = NULL, upstream = 100, downstr
     }else if (identical(data[[6]][i], "-")){
       prom[[2]][i] <- max(0, data[[3]][i] - downstream)
       if (is.null(chrom_size)){
-        prom[[3]][i] <- data[[3]][i] + upstream
+        prom[[3]][i] <- data[[3]][i] - upstream
       }else{
-        prom[[3]][i] <- min(chrom_size[data[[1]][i], ], data[[3]][i] + upstream)
+        prom[[3]][i] <- min(chrom_size[data[[1]][i], ], data[[3]][i] - upstream)
       }
       prom[[5]][i] <- data[[3]][i]
     }

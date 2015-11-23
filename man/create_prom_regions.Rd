@@ -4,7 +4,7 @@
 \alias{create_prom_regions}
 \title{Create promoter regions using RNA-Seq data}
 \usage{
-create_prom_regions(data, chrom_size = NULL, upstream = 100,
+create_prom_regions(data, chrom_size = NULL, upstream = -100,
   downstream = 100)
 }
 \arguments{
@@ -17,13 +17,13 @@ create_prom_regions(data, chrom_size = NULL, upstream = 100,
 \item{downstream}{Integer defining the length of bps downstream of TSS.}
 }
 \value{
-the created promoters stored in a \code{\link[GenomicRanges]{GRanges}} object.
+The created promoters stored in a \code{\link[GenomicRanges]{GRanges}} object.
 }
 \description{
 \code{create_prom_regions} creates promoter regions data using Transcription
 Start Sites (TSS) of RNA-Seq data as ground truth labels. Using the TSS
-data we create promoter regions \code{n} base pairs upstream and downstream
-of TSS. The RNA-Seq data should be a \code{\link{list}} object.
+data we create promoter regions \code{n} bps upstream and \code{m} bps
+downstream of TSS. The RNA-Seq data should be a \code{\link{list}} object.
 }
 \examples{
 # Load the RNA-Seq example dataset

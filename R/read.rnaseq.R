@@ -7,8 +7,8 @@
 #'
 #' @param file The name of the file to read data values from.
 #' @param is_del_chrom Logical: if TRUE, delete chromosomes X, Y and M.
-#' @param is_list Logical: if TRUE, a list is returned, a GRanges
-#'  object otherwise.
+#' @param is_list Logical: if TRUE a list is returned, otherwise
+#'  a GRanges object.
 #'
 #' @return a list if \code{is_list} is TRUE, otherwise a
 #'  \code{\link[GenomicRanges]{GRanges}} object.
@@ -18,10 +18,10 @@
 #' @examples
 #' # Get the location of the RNA-Seq file
 #' rnaseq_file <- system.file("extdata", "rnaseq.bed", package = "processHTS")
-#' rnaseq_data <- read.rnaseq(file=rnaseq_file)
+#' data <- read.rnaseq(file=rnaseq_file, is_list=FALSE)
 #'
 #' @export
-read.rnaseq <- function(file, is_del_chrom=FALSE, is_list=TRUE){
+read.rnaseq <- function(file, is_del_chrom = FALSE, is_list = TRUE){
   message("Reading file ", file, " ...")
   data_raw <- scan(file=file,
                    sep="\t",
@@ -54,7 +54,6 @@ read.rnaseq <- function(file, is_del_chrom=FALSE, is_list=TRUE){
   # Delete chromosomes X, Y and M -----------------------------------
   if (is_del_chrom){
     message("Removing X, Y and M chromosomes...")
-    entries <- c(1,2,3,4,5,6)  # Keep only data that are of interest
 
     chrom_ind <- which(data_raw[[1]] == "chrM")
     chrom_ind <- c(chrom_ind, which(data_raw[[1]] == "chrX"))

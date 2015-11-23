@@ -8,7 +8,8 @@
 #'   coverage reads.
 #' @inheritParams read.rnaseq
 #'
-#' @return a \code{\link[GenomicRanges]{GRanges}} object
+#' @return a list if \code{is_list} is TRUE, otherwise a
+#'  \code{\link[GenomicRanges]{GRanges}} object.
 #'
 #' @seealso \code{\link{read.chrom_size}}, \code{\link{read.rnaseq}}
 #'
@@ -18,10 +19,10 @@
 #' @examples
 #' # Get the location of the RRBS file
 #' rrbs_file <- system.file("extdata", "rrbs.bed", package = "processHTS")
-#' rrbs_data <- read.rrbs(file=rrbs_file)
+#' data <- read.rrbs(file=rrbs_file, is_list=FALSE)
 #'
 #' @export
-read.rrbs <- function(file, is_del_chrom=FALSE, rrbs_cov=0){
+read.rrbs <- function(file, is_del_chrom = FALSE, rrbs_cov = 0, is_list = TRUE){
   message("Reading file ", file, " ...")
   data_raw <- scan(file=file,
                    skip=1,
@@ -74,6 +75,11 @@ read.rrbs <- function(file, is_del_chrom=FALSE, rrbs_cov=0){
       entry <- entries[j]
       data_raw[[entry]] <- data_raw[[entry]][-low_cov]
     }
+  }
+
+  if (is_list){
+    message("Done!\n")
+    return(data_raw)
   }
 
   # Create a GRanges object -----------------------------------

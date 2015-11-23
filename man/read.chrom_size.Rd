@@ -2,7 +2,7 @@
 % Please edit documentation in R/read.chrom_size.R
 \name{read.chrom_size}
 \alias{read.chrom_size}
-\title{Read file containing human genome chromosome sizes.}
+\title{Read file containing genome chromosome sizes.}
 \usage{
 read.chrom_size(file)
 }
@@ -13,13 +13,13 @@ read.chrom_size(file)
 data frame.
 }
 \description{
-\code{read.chrom_size} reads a file containing human genome chromosome sizes
+\code{read.chrom_size} reads a file containing genome chromosome sizes
 using the \code{\link{scan}} function.
 }
 \examples{
 # Get the location of the hg19 file
 hg19_file <- system.file("extdata", "hg19", package = "processHTS")
-hg19_data <- read.chrom_size(file=hg19_file)
+data <- read.chrom_size(file=hg19_file)
 
 \dontrun{
 read.chrom_size(20)

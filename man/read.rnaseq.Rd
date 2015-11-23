@@ -11,8 +11,8 @@ read.rnaseq(file, is_del_chrom = FALSE, is_list = TRUE)
 
 \item{is_del_chrom}{Logical: if TRUE, delete chromosomes X, Y and M.}
 
-\item{is_list}{Logical: if TRUE, a list is returned, a GRanges
-object otherwise.}
+\item{is_list}{Logical: if TRUE a list is returned, otherwise
+a GRanges object.}
 }
 \value{
 a list if \code{is_list} is TRUE, otherwise a
@@ -27,7 +27,7 @@ initial file is in \code{gtf} format.
 \examples{
 # Get the location of the RNA-Seq file
 rnaseq_file <- system.file("extdata", "rnaseq.bed", package = "processHTS")
-rnaseq_data <- read.rnaseq(file=rnaseq_file)
+data <- read.rnaseq(file=rnaseq_file, is_list=FALSE)
 
 }
 \seealso{

@@ -1,6 +1,6 @@
-#' Read file containing human genome chromosome sizes.
+#' Read file containing genome chromosome sizes.
 #'
-#' \code{read.chrom_size} reads a file containing human genome chromosome sizes
+#' \code{read.chrom_size} reads a file containing genome chromosome sizes
 #' using the \code{\link{scan}} function.
 #'
 #' @param file The name of the file to read data values from.
@@ -12,7 +12,7 @@
 #' @examples
 #' # Get the location of the hg19 file
 #' hg19_file <- system.file("extdata", "hg19", package = "processHTS")
-#' hg19_data <- read.chrom_size(file=hg19_file)
+#' data <- read.chrom_size(file=hg19_file)
 #'
 #' \dontrun{
 #' read.chrom_size(20)

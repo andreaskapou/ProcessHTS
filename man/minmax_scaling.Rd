@@ -7,15 +7,19 @@
 minmax_scaling(data, xmin = NULL, xmax = NULL, fmin = 0, fmax = 1)
 }
 \arguments{
-\item{data}{Vector with numeric data to be scaled}
+\item{data}{Vector with numeric data to be scaled.}
 
-\item{xmin}{Optional minimum value, otherwise \code{min(data)} will be used}
+\item{xmin}{Optional minimum value, otherwise \code{min(data)} will be used.}
 
-\item{xmax}{Optional maximum value, otherwise \code{max(data)} will be used}
+\item{xmax}{Optional maximum value, otherwise \code{max(data)} will be used.}
 
-\item{fmin}{Optional minimum range value, default is 0}
+\item{fmin}{Optional minimum range value, default is 0.}
 
-\item{fmax}{Optional maximum range value, default is 1}
+\item{fmax}{Optional maximum range value, default is 1.}
+}
+\value{
+The scaled data in the given range, default is between (0, 1). If
+ xmin = xmax the input vector \code{data} is returned.
 }
 \description{
 \code{minmax_scaling} normalizes a given vector using the the min-max

@@ -4,7 +4,7 @@
 \alias{read.rrbs}
 \title{Read file containing \code{bed} formatted RRBS data}
 \usage{
-read.rrbs(file, is_del_chrom = FALSE, rrbs_cov = 0)
+read.rrbs(file, is_del_chrom = FALSE, rrbs_cov = 0, is_list = TRUE)
 }
 \arguments{
 \item{file}{The name of the file to read data values from.}
@@ -13,9 +13,13 @@ read.rrbs(file, is_del_chrom = FALSE, rrbs_cov = 0)
 
 \item{rrbs_cov}{Discard an optional integer to be used to disacrd low
 coverage reads.}
+
+\item{is_list}{Logical: if TRUE a list is returned, otherwise
+a GRanges object.}
 }
 \value{
-a \code{\link[GenomicRanges]{GRanges}} object
+a list if \code{is_list} is TRUE, otherwise a
+ \code{\link[GenomicRanges]{GRanges}} object.
 }
 \description{
 \code{read.rrbs} reads a file containing methylation data from RRBS
@@ -25,7 +29,7 @@ in \code{bed} format.
 \examples{
 # Get the location of the RRBS file
 rrbs_file <- system.file("extdata", "rrbs.bed", package = "processHTS")
-rrbs_data <- read.rrbs(file=rrbs_file)
+data <- read.rrbs(file=rrbs_file, is_list=FALSE)
 
 }
 \references{
