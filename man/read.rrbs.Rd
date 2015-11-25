@@ -11,8 +11,7 @@ read.rrbs(file, is_del_chrom = FALSE, rrbs_cov = 0, is_list = TRUE)
 
 \item{is_del_chrom}{Logical: if TRUE, delete chromosomes X, Y and M.}
 
-\item{rrbs_cov}{Discard an optional integer to be used to disacrd low
-coverage reads.}
+\item{rrbs_cov}{Optional integer to disacrd low coverage reads.}
 
 \item{is_list}{Logical: if TRUE a list is returned, otherwise
 a GRanges object.}

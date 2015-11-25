@@ -10,7 +10,7 @@ The processHTS package provides three categories of important functions.
 }
 \section{\code{read} functions}{
 
-\code{\link{read.hg}} for reading human reference genome file,
+\code{\link{read.chrom_size}} for reading human reference genome file,
 \code{\link{read.rnaseq}} read RNA-Seq bed formatred data file,
 \code{\link{read.rrbs}} read RRBS bed formatted data file.
 }

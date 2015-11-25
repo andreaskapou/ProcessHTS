@@ -4,8 +4,7 @@
 #' experiments using the \code{\link{scan}} function. The RRBS file should be
 #' in \code{bed} format.
 #'
-#' @param rrbs_cov Discard an optional integer to be used to disacrd low
-#'   coverage reads.
+#' @param rrbs_cov Optional integer to disacrd low coverage reads.
 #' @inheritParams read.rnaseq
 #'
 #' @return a list if \code{is_list} is TRUE, otherwise a

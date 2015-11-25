@@ -12,6 +12,7 @@
 #'
 #' @return The scaled data in the given range, default is between (0, 1). If
 #'  xmin = xmax the input vector \code{data} is returned.
+#'
 #' @examples
 #' data <- c(-20, 0, 15, 20)
 #' scaled <- minmax_scaling(data)

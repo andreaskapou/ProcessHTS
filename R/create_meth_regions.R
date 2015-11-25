@@ -24,13 +24,16 @@
 #' @return A \code{methRegions} object which contains the following information:
 #'  \itemize{
 #'    \item{ \code{meth_data}: A list containing the methylation data, where each
-#'      each entry in the list consists of a 3 X n dimensional matrix, where:
+#'      each entry in the list consists of an L X 3 dimensional matrix, where:
 #'      \enumerate{
-#'        \item{ 1st row: Contains the locations of the CpGs relative to TSS, where
-#'          the range (min, max) of possible values is given, by the inputs fmin and fmax.
+#'        \item{ 1st column: Contains the locations of the CpGs relative to TSS,
+#'          where the range (min, max) of possible values is given, by the
+#'          inputs fmin and fmax.
 #'        }
-#'        \item{ 2nd row: The total reads of the CpG in the corresponding location.}
-#'        \item{ 3rd row: The methylated reads of the CpG in the corresponding location.}
+#'        \item{ 2nd column: The total reads of the CpG in the corresponding
+#'          location.}
+#'        \item{ 3rd column: The methylated reads of the CpG in the corresponding
+#'          location.}
 #'      }
 #'    }
 #'    \item{ \code{prom_ind}: A vector storing the corresponding promoter indices.}
@@ -38,9 +41,17 @@
 #'
 #' @seealso \code{\link{read.rnaseq}}, \code{\link{read.rrbs}}, \code{\link{create_prom_regions}}
 #'
+#' @examples
+#' # Load the RNA-Seq example dataset
+#' data <- rnaseq_data
+#' promoter_data <- create_prom_regions(data, upstream=-2000, downstream=2000)
+#' rrbs_data <- rrbs_data
+#'
+#' meth_regions <- create_meth_regions(rrbs_data, promoter_data)
+#'
 #' @export
-create_meth_regions <- function(rrbs_data, promoter_data, upstream = -100, downstream = 100, 
-                                num_CpG = 0, sd_thresh = 0, fmin = -1, fmax = 1){
+create_meth_regions <- function(rrbs_data, promoter_data, upstream = -100, downstream = 100,
+                                num_CpG = 1, sd_thresh = 0, fmin = -1, fmax = 1){
   assertthat::assert_that(is(rrbs_data, "GRanges"))
   assertthat::assert_that(is(promoter_data, "GRanges"))
   if (upstream > 0 ){
@@ -104,19 +115,19 @@ create_meth_regions <- function(rrbs_data, promoter_data, upstream = -100, downs
           # In the "-" strand the order of the locations should change
           Order <- order(centerd_data)
 
-          meth_data[[n]] <- matrix(0, nrow = 3, ncol = length(cpg_ind))
+          meth_data[[n]] <- matrix(0, nrow = length(cpg_ind), ncol = 3)
 
           # Store normalized locations of methylated CpGs in (fmin, fmax) region
-          meth_data[[n]][1, ] <- minmax_scaling(data = centerd_data[Order],
+          meth_data[[n]][ ,1] <- minmax_scaling(data = centerd_data[Order],
                                                 xmin = upstream,
                                                 xmax = downstream,
                                                 fmin = fmin,
                                                 fmax = fmax)
 
           # Store total reads in the corresponding locations
-          meth_data[[n]][2, ] <- tot_reads[cpg_ind][Order]
+          meth_data[[n]][ ,2] <- tot_reads[cpg_ind][Order]
           # Store methylated reads in the corresponding locations
-          meth_data[[n]][3, ] <- meth_reads[cpg_ind][Order]
+          meth_data[[n]][ ,3] <- meth_reads[cpg_ind][Order]
 
           # Increase data points counter
           n <- n + 1

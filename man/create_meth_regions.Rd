@@ -5,7 +5,7 @@
 \title{Create methylation regions for each gene promoter.}
 \usage{
 create_meth_regions(rrbs_data, promoter_data, upstream = -100,
-  downstream = 100, num_CpG = 0, sd_thresh = 0, fmin = -1, fmax = 1)
+  downstream = 100, num_CpG = 1, sd_thresh = 0, fmin = -1, fmax = 1)
 }
 \arguments{
 \item{rrbs_data}{\code{\link[GenomicRanges]{GRanges}} object containing the
@@ -33,13 +33,16 @@ of the methylation change in a region.}
 A \code{methRegions} object which contains the following information:
  \itemize{
    \item{ \code{meth_data}: A list containing the methylation data, where each
-     each entry in the list consists of a 3 X n dimensional matrix, where:
+     each entry in the list consists of an L X 3 dimensional matrix, where:
      \enumerate{
-       \item{ 1st row: Contains the locations of the CpGs relative to TSS, where
-         the range (min, max) of possible values is given, by the inputs fmin and fmax.
+       \item{ 1st column: Contains the locations of the CpGs relative to TSS,
+         where the range (min, max) of possible values is given, by the
+         inputs fmin and fmax.
        }
-       \item{ 2nd row: The total reads of the CpG in the corresponding location.}
-       \item{ 3rd row: The methylated reads of the CpG in the corresponding location.}
+       \item{ 2nd column: The total reads of the CpG in the corresponding
+         location.}
+       \item{ 3rd column: The methylated reads of the CpG in the corresponding
+         location.}
      }
    }
    \item{ \code{prom_ind}: A vector storing the corresponding promoter indices.}
@@ -52,6 +55,15 @@ the methylated CpGs individually, and the RNA-Seq data are used to locate
 the Transcription Start Sites (TSS) of each gene and its promoter region.
 The RRBS and RNA-Seq data should be a \code{\link[GenomicRanges]{GRanges}}
 object.
+}
+\examples{
+# Load the RNA-Seq example dataset
+data <- rnaseq_data
+promoter_data <- create_prom_regions(data, upstream=-2000, downstream=2000)
+rrbs_data <- rrbs_data
+
+meth_regions <- create_meth_regions(rrbs_data, promoter_data)
+
 }
 \seealso{
 \code{\link{read.rnaseq}}, \code{\link{read.rrbs}}, \code{\link{create_prom_regions}}

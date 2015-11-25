@@ -5,7 +5,7 @@
 \title{Wrapper method for processing RRBS and RNA-Seq HTS data.}
 \usage{
 meth_expr_data(rrbs_file, rnaseq_file, chrom_size_file = NULL,
-  upstream = -100, downstream = 100, num_CpG = 10, sd_thresh = 0,
+  upstream = -100, downstream = 100, num_CpG = 1, sd_thresh = 0,
   is_del_chrom = FALSE, rrbs_cov = 0, fmin = -1, fmax = 1)
 }
 \arguments{
@@ -32,6 +32,8 @@ of the methylation change in a region.}
 \item{is_del_chrom}{Optional logical: if TRUE, delete chromosomes X,
 Y and M.}
 
+\item{rrbs_cov}{Optional integer to disacrd low coverage reads.}
+
 \item{fmin}{Optional minimum range value for region location scaling.}
 
 \item{fmax}{Optional maximum range value for region location scaling.}
@@ -41,13 +43,16 @@ A \code{methExpr} object which contains, among others the following
  information:
  \itemize{
    \item{ \code{meth_data}: A list containing the methylation data, where each
-     each entry in the list consists of a 3 X n dimensional matrix, where:
+     each entry in the list consists of an L X 3 dimensional matrix, where:
      \enumerate{
-       \item{ 1st row: Contains the locations of the CpGs relative to TSS, where
-         the range (min, max) of possible values is given, by the inputs fmin and fmax.
+       \item{ 1st column: Contains the locations of the CpGs relative to TSS,
+         where the range (min, max) of possible values is given, by the
+         inputs fmin and fmax.
        }
-       \item{ 2nd row: The total reads of the CpG in the corresponding location.}
-       \item{ 3rd row: The methylated reads of the CpG in the corresponding location.}
+       \item{ 2nd column: The total reads of the CpG in the corresponding
+         location.}
+       \item{ 3rd column: The methylated reads of the CpG in the corresponding
+         location.}
      }
    }
    \item{ \code{expr_data}: A \code{\link[GenomicRanges]{GRanges}} objects containing the
@@ -61,8 +66,8 @@ expression levels for those promoter regions.
 }
 \examples{
 # Get the location of the files
-rrbs_file <- system.file("extdata", "rrbs.bed", package = "processHTS")
-rnaseq_file <- system.file("extdata", "rnaseq.bed", package = "processHTS")
+rrbs_file <- system.file("extdata", "rrbsH1hESC.bed", package = "processHTS")
+rnaseq_file <- system.file("extdata", "rnaseqH1hESC.bed", package = "processHTS")
 data <- meth_expr_data(rrbs_file, rnaseq_file)
 
 }
