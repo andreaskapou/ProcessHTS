@@ -3,9 +3,9 @@ Type: Package
 Title: Process HTS Files and Data
 Version: 0.0.0.9000
 Date: 2015-11-19
-Author: person("C. A.", "Kapourani", email = "c.a.kapourani@sms.ed.ac.uk",
+Authors@R: person("C. A.", "Kapourani", email = "c.a.kapourani@sms.ed.ac.uk",
                   role = c("aut", "cre"))
-Description: More about what it does (maybe more than one line)
+Description: More about what it does
 License: GPL-3
 Depends: R (>= 3.0.1)
 LazyData: TRUE

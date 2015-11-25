@@ -4,8 +4,8 @@
 \alias{create_meth_regions}
 \title{Create methylation regions for each gene promoter.}
 \usage{
-create_meth_regions(rrbs_data, promoter_data, upstream, downstream,
-  num_CpG = 0, sd_thresh = 0, fmin = -1, fmax = 1)
+create_meth_regions(rrbs_data, promoter_data, upstream = -100,
+  downstream = 100, num_CpG = 0, sd_thresh = 0, fmin = -1, fmax = 1)
 }
 \arguments{
 \item{rrbs_data}{\code{\link[GenomicRanges]{GRanges}} object containing the

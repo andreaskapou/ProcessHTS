@@ -17,5 +17,6 @@ test_that("minmax scaling works",{
   expect_identical(minmax_scaling(data, xmin, xmax), c(0, 0.5, 0.875, 1))
   data <- c(-20, 20)
   expect_identical(minmax_scaling(data, fmin=-2, fmax=2), c(-2, 2))
-  # expect_error(minmax_scaling(data, -xmin, xmax))
+  expect_identical(minmax_scaling(data, -xmin, xmax), c(-20, 20))
+  expect_identical(minmax_scaling(4, 0, 8), 0.5)
 })
