@@ -86,7 +86,7 @@ create_meth_regions <- function(rrbs_data, promoter_data, upstream = -100, downs
   cpg_ind      <- c(cpg_ind, hits[1,2])     # Add the first subject hit
 
 
-  message("Generating promoter regions data...")
+  message("Generating final methylation data...")
   for (i in 2:NROW(hits)){
     # If query hits is the same as the previous one
     if (hits[i,1] == hits[(i - 1),1]){
