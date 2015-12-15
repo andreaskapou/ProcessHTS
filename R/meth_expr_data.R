@@ -31,7 +31,7 @@
 #'          location.}
 #'      }
 #'    }
-#'    \item{ \code{expr_data}: A \code{\link[GenomicRanges]{GRanges}} objects containing the
+#'    \item{ \code{expr_data}: A \code{\link[GenomicRanges]{GRanges}} object containing the
 #'    corresponding gene expression data for each entry of the \code{meth_data} list.}
 #'  }
 #'

@@ -50,8 +50,9 @@
 #' meth_regions <- create_meth_regions(rrbs_data, promoter_data)
 #'
 #' @export
-create_meth_regions <- function(rrbs_data, promoter_data, upstream = -100, downstream = 100,
-                                num_CpG = 1, sd_thresh = 0, fmin = -1, fmax = 1){
+create_meth_regions <- function(rrbs_data, promoter_data, upstream = -100,
+                                downstream = 100, num_CpG = 1, sd_thresh = 0,
+                                                         fmin = -1, fmax = 1){
   assertthat::assert_that(is(rrbs_data, "GRanges"))
   assertthat::assert_that(is(promoter_data, "GRanges"))
   if (upstream > 0 ){
@@ -64,7 +65,7 @@ create_meth_regions <- function(rrbs_data, promoter_data, upstream = -100, downs
                                           ignore.strand = FALSE)
 
   if (length(overlaps) < 2){
-    stop("Not enough matches between the RRBS data and RNA-Seq data. Check again the file names provided.")
+    stop("Not enough matches between the RRBS data and RNA-Seq data.")
   }
 
   message("Converting Granges objects in matrices...")
@@ -72,9 +73,9 @@ create_meth_regions <- function(rrbs_data, promoter_data, upstream = -100, downs
   prom_loc <- unique(hits[,1])  # Keep promoter locations
 
   # Convert data in matrix format for faster lookup
-  tss_loc    <- as.vector(GenomicRanges::elementMetadata(promoter_data)$tss)
-  cpg_loc    <- as.vector(GenomicRanges::ranges(rrbs_data)@start)
-  tot_reads  <- as.vector(GenomicRanges::elementMetadata(rrbs_data)$total_reads)
+  tss_loc   <- as.vector(GenomicRanges::elementMetadata(promoter_data)$tss)
+  cpg_loc   <- as.vector(GenomicRanges::ranges(rrbs_data)@start)
+  tot_reads <- as.vector(GenomicRanges::elementMetadata(rrbs_data)$total_reads)
   meth_reads <- as.vector(GenomicRanges::elementMetadata(rrbs_data)$meth_reads)
 
   n            <- 1                         # Data points counter
@@ -107,7 +108,8 @@ create_meth_regions <- function(rrbs_data, promoter_data, upstream = -100, downs
           # TSS location for promoter 'promCount'
           tss           <- tss_loc[prom_loc[prom_counter]]
           # Extract strand information, i.e. direction
-          strand_direct <- as.matrix(GenomicRanges::strand(promoter_data[prom_loc[prom_counter]])@values)[1,1]
+          strand_direct <- as.matrix(GenomicRanges::strand(
+                            promoter_data[prom_loc[prom_counter]])@values)[1,1]
           # Shift CpG locations relative to TSS
           centerd_data  <- center_loc(region = region,
                                       tss = tss,

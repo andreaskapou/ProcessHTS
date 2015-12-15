@@ -20,7 +20,8 @@
 #' promoters <- create_prom_regions(data)
 #'
 #' @export
-create_prom_regions <- function(data, chrom_size = NULL, upstream = -100, downstream = 100){
+create_prom_regions <- function(data, chrom_size = NULL, upstream = -100,
+                                                       downstream = 100){
   assertthat::assert_that(is.list(data))
   N <- length(data[[1]])  # Length of the dataset
   if (upstream > 0 ){
