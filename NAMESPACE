@@ -2,7 +2,9 @@
 
 export(create_meth_regions)
 export(create_prom_regions)
+export(create_tss_regions)
 export(diff_meth_expr_data)
+export(extract_fpkm)
 export(meth_expr_data)
 export(minmax_scaling)
 export(read.chrom_size)

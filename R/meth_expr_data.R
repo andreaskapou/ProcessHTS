@@ -46,9 +46,10 @@
 #'
 #' @export
 meth_expr_data <- function(rrbs_file, rnaseq_file, chrom_size_file = NULL,
-                           upstream = -100, downstream = 100, num_CpG = 1,
-                           sd_thresh = 0, is_del_chrom = FALSE, rrbs_cov = 0,
-                           ignore_strand = FALSE, fmin = -1, fmax = 1){
+                           upstream = -100, downstream = 100,
+                           num_CpG = 1, sd_thresh = 0, is_del_chrom = FALSE,
+                           rrbs_cov = 0, ignore_strand = FALSE,
+                           tss_data = FALSE, fmin = -1, fmax = 1){
 
   # Process RRBS file and return data in the required format
   rrbs_data <- read.rrbs(file         = rrbs_file,
@@ -69,10 +70,17 @@ meth_expr_data <- function(rrbs_file, rnaseq_file, chrom_size_file = NULL,
 
   # Read TSS BED file and return a promoter region n upstream
   # and m downstream of Transcription Start Site (TSS)
-  prom_data <- create_prom_regions(data       = rnaseq_data,
-                                   chrom_size = chrom_size,
-                                   upstream   = upstream,
-                                   downstream = downstream)
+  if (tss_data){
+    prom_data <- create_tss_regions(data       = rnaseq_data,
+                                    chrom_size = chrom_size,
+                                    upstream   = upstream,
+                                    downstream = downstream)
+  }else{
+    prom_data <- create_prom_regions(data       = rnaseq_data,
+                                     chrom_size = chrom_size,
+                                     upstream   = upstream,
+                                     downstream = downstream)
+  }
   # Remove objects from workspace
   rm(chrom_size)
   rm(rnaseq_data)

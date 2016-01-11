@@ -44,7 +44,7 @@ minmax_scaling <- function(data, xmin = NULL, xmax = NULL, fmin = 0, fmax = 1){
 #' @return The FPKM numeric value
 #'
 #' @examples
-#' data <- "gene_id "72"; transcr "ENST00000456328"; FPKM "0.0736851531";"
+#' data <- 'gene_id "72"; transcr "ENST00000456328"; FPKM "0.0736851531";'
 #' scaled <- extract_fpkm(data)
 #'
 #' @export

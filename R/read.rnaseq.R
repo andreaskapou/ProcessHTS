@@ -39,7 +39,6 @@ read.rnaseq <- function(file, is_del_chrom = FALSE, is_list = TRUE){
 
   # Extract FPKM from each gene --------------------------------
   message("Extracting FPKM...")
-  data_raw[[11]] <- vector(mode = "numeric")
   for (i in 1:length(data_raw[[10]])){
     data_raw[[10]][i] <- extract_fpkm(data_raw[[10]][i])
   }
