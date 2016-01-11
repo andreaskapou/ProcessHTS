@@ -6,7 +6,8 @@
 \usage{
 meth_expr_data(rrbs_file, rnaseq_file, chrom_size_file = NULL,
   upstream = -100, downstream = 100, num_CpG = 1, sd_thresh = 0,
-  is_del_chrom = FALSE, rrbs_cov = 0, fmin = -1, fmax = 1)
+  is_del_chrom = FALSE, rrbs_cov = 0, ignore_strand = FALSE,
+  tss_data = FALSE, fmin = -1, fmax = 1)
 }
 \arguments{
 \item{rrbs_file}{The name of the RRBS '.bed' formatted file to read
@@ -33,6 +34,9 @@ of the methylation change in a region.}
 Y and M.}
 
 \item{rrbs_cov}{Optional integer to disacrd low coverage reads.}
+
+\item{ignore_strand}{Logical, whether or not to ignore strand information,
+when finding overlaps.}
 
 \item{fmin}{Optional minimum range value for region location scaling.}
 

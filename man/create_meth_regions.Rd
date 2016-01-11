@@ -5,7 +5,8 @@
 \title{Create methylation regions for each gene promoter.}
 \usage{
 create_meth_regions(rrbs_data, promoter_data, upstream = -100,
-  downstream = 100, num_CpG = 1, sd_thresh = 0, fmin = -1, fmax = 1)
+  downstream = 100, num_CpG = 1, sd_thresh = 0, ignore_strand = FALSE,
+  fmin = -1, fmax = 1)
 }
 \arguments{
 \item{rrbs_data}{\code{\link[GenomicRanges]{GRanges}} object containing the
@@ -24,6 +25,9 @@ are discarded.}
 
 \item{sd_thresh}{Opotional numeric defining the minimum standard deviation
 of the methylation change in a region.}
+
+\item{ignore_strand}{Logical, whether or not to ignore strand information,
+when finding overlaps.}
 
 \item{fmin}{Optional minimum range value for region location scaling.}
 
