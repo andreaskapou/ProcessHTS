@@ -46,9 +46,9 @@
 #'
 #' @export
 meth_expr_data <- function(rrbs_file, rnaseq_file, chrom_size_file = NULL,
-                             upstream = -100, downstream = 100, num_CpG = 1,
-                             sd_thresh = 0, is_del_chrom = FALSE, rrbs_cov = 0,
-                             fmin = -1, fmax = 1){
+                           upstream = -100, downstream = 100, num_CpG = 1,
+                           sd_thresh = 0, is_del_chrom = FALSE, rrbs_cov = 0,
+                           ignore_strand = FALSE, fmin = -1, fmax = 1){
 
   # Process RRBS file and return data in the required format
   rrbs_data <- read.rrbs(file         = rrbs_file,
@@ -84,6 +84,7 @@ meth_expr_data <- function(rrbs_file, rnaseq_file, chrom_size_file = NULL,
                                       downstream    = downstream,
                                       num_CpG       = num_CpG,
                                       sd_thresh     = sd_thresh,
+                                      ignore_strand = ignore_strand,
                                       fmin          = -1,
                                       fmax          = 1)
 
