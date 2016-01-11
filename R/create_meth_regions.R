@@ -18,6 +18,8 @@
 #'  are discarded.
 #' @param sd_thresh Opotional numeric defining the minimum standard deviation
 #'  of the methylation change in a region.
+#' @param ignore_strand Logical, whether or not to ignore strand information,
+#'  when finding overlaps.
 #' @param fmin Optional minimum range value for region location scaling.
 #' @param fmax Optional maximum range value for region location scaling.
 #'
@@ -52,7 +54,7 @@
 #' @export
 create_meth_regions <- function(rrbs_data, promoter_data, upstream = -100,
                                 downstream = 100, num_CpG = 1, sd_thresh = 0,
-                                                         fmin = -1, fmax = 1){
+                                ignore_strand = FALSE, fmin = -1, fmax = 1){
   assertthat::assert_that(is(rrbs_data, "GRanges"))
   assertthat::assert_that(is(promoter_data, "GRanges"))
   if (upstream > 0 ){
@@ -62,7 +64,7 @@ create_meth_regions <- function(rrbs_data, promoter_data, upstream = -100,
   # Find overlaps between promoter regions and RRBS data
   overlaps <- GenomicRanges::findOverlaps(query   = promoter_data,
                                           subject = rrbs_data,
-                                          ignore.strand = FALSE)
+                                          ignore.strand = ignore_strand)
 
   if (length(overlaps) < 2){
     stop("Not enough matches between the RRBS data and RNA-Seq data.")
