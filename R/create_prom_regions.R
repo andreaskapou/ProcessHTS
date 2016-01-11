@@ -36,7 +36,8 @@ create_prom_regions <- function(data, chrom_size = NULL, upstream = -100,
   prom[[4]] <- data[[4]]  # Gene ENSEMBL id
   prom[[5]] <- vector(mode = "integer", N)  # TSS position
   prom[[6]] <- data[[6]]  # Strand: + or - or . for unknown
-  prom[[7]] <- ceiling(data[[5]])  # Expression level (keep only integer part)
+  prom[[7]] <- data[[5]]  # Expression level
+  prom[[8]] <- data[[10]]  # Expression level in FPKM
 
   for (i in 1:N){
     # Depending on strand we change the regions upstream and downstream of TSS
@@ -66,7 +67,8 @@ create_prom_regions <- function(data, chrom_size = NULL, upstream = -100,
                       strand    = prom[[6]],
                       gene_id   = prom[[4]],
                       tss       = prom[[5]],
-                      gene_expr = prom[[7]]
+                      gene_expr = prom[[7]],
+                      gene_fpkm = prom[[8]]
                 )
   message("Created GRanges object for promoter regions...")
   return(promoter_data)

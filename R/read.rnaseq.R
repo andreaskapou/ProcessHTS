@@ -34,8 +34,15 @@ read.rnaseq <- function(file, is_del_chrom = FALSE, is_list = TRUE){
                              NULL,         # Source, e.g. HAVANA
                              NULL,         # Type of feature, e.g. gene
                              NULL,         # No information
-                             NULL          # Metadata
+                             "character"   # Metadata
                    ))
+
+  # Extract FPKM from each gene --------------------------------
+  message("Extracting FPKM...")
+  data_raw[[11]] <- vector(mode = "numeric")
+  for (i in 1:length(data_raw[[10]])){
+    data_raw[[10]][i] <- extract_fpkm(data_raw[[10]][i])
+  }
 
   # Sorting data -----------------------------------------------
   # According to the following order priority:
@@ -43,7 +50,7 @@ read.rnaseq <- function(file, is_del_chrom = FALSE, is_list = TRUE){
   #     2: then 'position in chromosome' and
   #     3: finally 'strand'
   message("Sorting data...")
-  entries <- c(1,2,3,4,5,6)  # Keep only data that are of interest
+  entries <- c(1,2,3,4,5,6,10)  # Keep only data that are of interest
 
   Order <- with(data_raw, order(data_raw[[1]], data_raw[[2]], data_raw[[6]]))
   for (j in 1:length(entries)){
@@ -75,7 +82,8 @@ read.rnaseq <- function(file, is_del_chrom = FALSE, is_list = TRUE){
                       strand = data_raw[[6]],
                       ranges = IRanges::IRanges(start=data_raw[[2]], end=data_raw[[3]]),
                       gene_id = data_raw[[4]],
-                      gene_expr = data_raw[[5]]
+                      gene_expr = data_raw[[5]],
+                      gene_fpkm = data_raw[[10]]
                 )
 
   message("Done!\n")
