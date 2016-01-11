@@ -50,6 +50,6 @@ minmax_scaling <- function(data, xmin = NULL, xmax = NULL, fmin = 0, fmax = 1){
 #' @export
 extract_fpkm <- function(x){
   # TODO test when no FPKM is available
-  fpkm = gsub(".* FPKM ([^;]+);.*", "\\1", x)
+  fpkm <- gsub(".* FPKM ([^;]+);.*", "\\1", x)
   return(as.numeric(fpkm))
 }

@@ -27,16 +27,15 @@ create_tss_regions <- function(data, chrom_size = NULL, upstream = -100,
 
   # Create list object for keeping unique TSS regions
   tss <- list()
-  tss[[1]] <- vector(mode = "character") #data[[1]]  # Reference chromosome
-  tss[[2]] <- vector(mode = "integer") #, N)  # Start position in chromosome
-  tss[[3]] <- vector(mode = "integer") # N)  # End position in chromosome
-  tss[[4]] <- vector(mode = "character") # data[[4]]  # Gene ENSEMBL id
-  tss[[5]] <- vector(mode = "integer") # N)  # TSS position
-  tss[[6]] <- vector(mode = "character") # data[[6]]  # Strand: + or - or . for unknown
-  tss[[7]] <- vector(mode = "numeric") # data[[5]]  # Expression level
-  tss[[8]] <- vector(mode = "numeric") # data[[10]]  # Expression level in FPKM
+  tss[[1]] <- vector(mode = "character") # Reference chromosome
+  tss[[2]] <- vector(mode = "integer")   # Start position in chromosome
+  tss[[3]] <- vector(mode = "integer")   # End position in chromosome
+  tss[[4]] <- vector(mode = "character") # Gene ENSEMBL id
+  tss[[5]] <- vector(mode = "integer")   # TSS position
+  tss[[6]] <- vector(mode = "character") # Strand: + or - or . for unknown
+  tss[[7]] <- vector(mode = "numeric")   # Expression level
+  tss[[8]] <- vector(mode = "numeric")   # Expression level in FPKM
 
-  n            <- 1                         # Data points counter
   LABEL        <- FALSE                     # Flag variable
   tss_counter  <- 0                         # TSS counter
   tss_ind      <- vector(mode = "integer")  # Vector of tss indices
@@ -57,7 +56,6 @@ create_tss_regions <- function(data, chrom_size = NULL, upstream = -100,
       }
       position <- which.max(expr)
       position <- tss_ind[position]
-      #max_expr <- max(expr)
 
       tss[[1]][tss_counter] <- data[[1]][position]
 

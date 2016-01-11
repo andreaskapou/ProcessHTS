@@ -71,7 +71,7 @@ create_meth_regions <- function(rrbs_data, promoter_data, upstream = -100,
   }
 
   message("Converting Granges objects in matrices...")
-  hits <- as.data.frame(overlaps)   # Create a HITS matrix for faster computations
+  hits <- as.data.frame(overlaps)   # Create a HITS matrix faster computations
   prom_loc <- unique(hits[,1])  # Keep promoter locations
 
   # Convert data in matrix format for faster lookup

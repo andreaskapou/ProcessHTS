@@ -38,6 +38,8 @@ Y and M.}
 \item{ignore_strand}{Logical, whether or not to ignore strand information,
 when finding overlaps.}
 
+\item{tss_data}{Logical, if the data read are TSS or gene}
+
 \item{fmin}{Optional minimum range value for region location scaling.}
 
 \item{fmax}{Optional maximum range value for region location scaling.}

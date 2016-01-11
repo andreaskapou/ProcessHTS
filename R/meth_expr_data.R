@@ -13,6 +13,7 @@
 #' @param is_del_chrom Optional logical: if TRUE, delete chromosomes X,
 #'  Y and M.
 #' @param rrbs_cov Optional integer to disacrd low coverage reads.
+#' @param tss_data Logical, if the data read are TSS or gene
 #' @inheritParams create_meth_regions
 #'
 #' @return A \code{methExpr} object which contains, among others the following

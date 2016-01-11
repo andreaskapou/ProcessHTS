@@ -46,7 +46,8 @@ create_prom_regions <- function(data, chrom_size = NULL, upstream = -100,
       if (is.null(chrom_size)){
         prom[[3]][i] <- data[[2]][i] + downstream
       }else{
-        prom[[3]][i] <- min(chrom_size[data[[1]][i], ], data[[2]][i] + downstream)
+        prom[[3]][i] <- min(chrom_size[data[[1]][i], ],
+                            data[[2]][i] + downstream)
       }
       prom[[5]][i] <- data[[2]][i]
     }else if (identical(data[[6]][i], "-")){
@@ -54,7 +55,8 @@ create_prom_regions <- function(data, chrom_size = NULL, upstream = -100,
       if (is.null(chrom_size)){
         prom[[3]][i] <- data[[3]][i] - upstream
       }else{
-        prom[[3]][i] <- min(chrom_size[data[[1]][i], ], data[[3]][i] - upstream)
+        prom[[3]][i] <- min(chrom_size[data[[1]][i], ],
+                            data[[3]][i] - upstream)
       }
       prom[[5]][i] <- data[[3]][i]
     }
@@ -63,7 +65,8 @@ create_prom_regions <- function(data, chrom_size = NULL, upstream = -100,
 
   # Create a GRanges object
   promoter_data <- GenomicRanges::GRanges(seqnames = prom[[1]],
-                      ranges    = IRanges::IRanges(start = prom[[2]], end = prom[[3]]),
+                      ranges    = IRanges::IRanges(start = prom[[2]],
+                                                   end = prom[[3]]),
                       strand    = prom[[6]],
                       gene_id   = prom[[4]],
                       tss       = prom[[5]],
