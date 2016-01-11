@@ -33,3 +33,23 @@ minmax_scaling <- function(data, xmin = NULL, xmax = NULL, fmin = 0, fmax = 1){
 
   return(minmax_scaled)
 }
+
+
+#' Extract FPKM from string
+#'
+#' \code{extract_fpkm} Extracts FPKM value from a string
+#'
+#' @param x a string containing FPKM information
+#'
+#' @return The FPKM numeric value
+#'
+#' @examples
+#' data <- "gene_id "72"; transcr "ENST00000456328"; FPKM "0.0736851531";"
+#' scaled <- extract_fpkm(data)
+#'
+#' @export
+extract_fpkm <- function(x){
+  # TODO test when no FPKM is available
+  fpkm = gsub(".* FPKM ([^;]+);.*", "\\1", x)
+  return(as.numeric(fpkm))
+}
