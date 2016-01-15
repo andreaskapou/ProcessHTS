@@ -37,7 +37,7 @@ create_prom_regions <- function(data, chrom_size = NULL, upstream = -100,
   prom[[5]] <- vector(mode = "integer", N)  # TSS position
   prom[[6]] <- data[[6]]                    # Strand: + or - or . for unknown
   prom[[7]] <- data[[5]]                    # Expression level
-  prom[[8]] <- data[[10]]                   # Expression level in FPKM
+  prom[[8]] <- data[[11]]                   # Expression level in FPKM
 
   for (i in 1:N){
     # Depending on strand we change the regions upstream and downstream of TSS

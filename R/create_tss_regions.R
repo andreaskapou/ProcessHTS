@@ -67,7 +67,7 @@ create_tss_regions <- function(data, chrom_size = NULL, upstream = -100,
       tss[[5]][tss_counter] <- data[[2]][position]
       tss[[6]][tss_counter] <- data[[6]][position]
       tss[[7]][tss_counter] <- data[[5]][position]
-      tss[[8]][tss_counter] <- data[[10]][position]
+      tss[[8]][tss_counter] <- data[[11]][position]
 
       if (identical(data[[6]][i], "+")){
         tss[[2]][tss_counter] <- max(0, data[[2]][position] + upstream)
