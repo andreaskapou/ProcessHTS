@@ -74,7 +74,7 @@ create_tss_regions <- function(data, chrom_size = NULL, upstream = -100,
         if (is.null(chrom_size)){
           tss[[3]][tss_counter] <- data[[2]][position] + downstream
         }else{
-          tss[[3]][tss_counter] <- min(chrom_size[data[[1]][i], ],
+          tss[[3]][tss_counter] <- min(chrom_size[data[[1]][position], ],
                                        data[[2]][position] + downstream)
         }
       }else if (identical(data[[6]][i], "-")){
@@ -82,7 +82,7 @@ create_tss_regions <- function(data, chrom_size = NULL, upstream = -100,
         if (is.null(chrom_size)){
           tss[[3]][tss_counter] <- data[[2]][position] - upstream
         }else
-          tss[[3]][tss_counter] <- min(chrom_size[data[[1]][i], ],
+          tss[[3]][tss_counter] <- min(chrom_size[data[[1]][position], ],
                                        data[[2]][position] - upstream)
       }
 
