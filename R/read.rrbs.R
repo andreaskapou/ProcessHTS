@@ -39,6 +39,11 @@ read.rrbs <- function(file, is_del_chrom = FALSE, rrbs_cov = 0, is_list = TRUE){
                              integer()     # Methylation percentage at this position
                    ))
 
+
+  # Convert to actual methylated reads -------------------------
+  data_raw[[11]] <- as.integer(round(0.01 * data_raw[[5]] * data_raw[[11]]))
+
+
   # Sorting data -----------------------------------------------
   # According to the following order priority:
   #     1: First 'chromosome',
@@ -53,6 +58,7 @@ read.rrbs <- function(file, is_del_chrom = FALSE, rrbs_cov = 0, is_list = TRUE){
     data_raw[[entry]] <- data_raw[[entry]][Order]
   }
 
+
   # Delete chromosomes X, Y and M -----------------------------
   if (is_del_chrom){
     message("Removing X, Y and M chromosomes...")
@@ -65,6 +71,7 @@ read.rrbs <- function(file, is_del_chrom = FALSE, rrbs_cov = 0, is_list = TRUE){
     }
   }
 
+
   # Discard low coverage reads --------------------------------
   #   i.e CpGs with less than n total reads)
   if (rrbs_cov > 0){
@@ -76,10 +83,13 @@ read.rrbs <- function(file, is_del_chrom = FALSE, rrbs_cov = 0, is_list = TRUE){
     }
   }
 
+
+  # Return the RRBS data as a list object ---------------------
   if (is_list){
     message("Done!\n")
     return(data_raw)
   }
+
 
   # Create a GRanges object -----------------------------------
   message("Creating GRanges object...")
@@ -87,7 +97,7 @@ read.rrbs <- function(file, is_del_chrom = FALSE, rrbs_cov = 0, is_list = TRUE){
                       strand = data_raw[[6]],
                       ranges = IRanges::IRanges(start=data_raw[[2]], width=1),
                       total_reads = data_raw[[5]],
-                      meth_reads = as.integer(round(0.01 * data_raw[[5]] * data_raw[[11]]))
+                      meth_reads = data_raw[[11]]
                )
 
   message("Done!\n")

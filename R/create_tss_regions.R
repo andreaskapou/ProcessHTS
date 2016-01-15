@@ -41,7 +41,9 @@ create_tss_regions <- function(data, chrom_size = NULL, upstream = -100,
   tss_ind      <- vector(mode = "integer")  # Vector of tss indices
   tss_ind      <- c(tss_ind, 1)             # Add the first index
 
+  # Iterate over all TSS
   for (i in 2:N){
+    # Check if TSSs are in the same region
     if (data[[2]][i] > (data[[2]][i - 1] + downstream)){
       tss_counter  <- tss_counter + 1
       LABEL        <- TRUE
@@ -50,37 +52,39 @@ create_tss_regions <- function(data, chrom_size = NULL, upstream = -100,
     }
 
     if (LABEL){
+      # Get expression levels of TSS in same region
       expr <- vector(mode = "numeric")
       for (j in 1:length(tss_ind)){
         expr[j] <- data[[5]][tss_ind[j]]
       }
+      # Keep relative max position
       position <- which.max(expr)
+      # Get the TSS actual max position in 'data' object
       position <- tss_ind[position]
 
       tss[[1]][tss_counter] <- data[[1]][position]
-
-      #if (identical(data[[6]][i], "+")){
-      #  tss[[2]][tss_counter] <- max(0, data[[2]][position] + upstream)
-      #  if (is.null(chrom_size)){
-      #    tss[[3]][tss_counter] <- data[[2]][position] + downstream
-      #  }else{
-      #    tss[[3]][tss_counter] <- min(chrom_size[data[[1]][i], ], data[[2]][position] + downstream)
-      #  }
-      #}else if (identical(data[[6]][i], "-")){
-      #  tss[[2]][tss_counter] <- max(0, data[[2]][position] - downstream)
-      #  if (is.null(chrom_size)){
-      #    tss[[3]][tss_counter] <- data[[2]][position] - upstream
-      #  }else
-      #    tss[[3]][tss_counter] <- min(chrom_size[data[[1]][i], ], data[[2]][position] - upstream)
-      #}
-
-      tss[[2]][tss_counter] <- data[[2]][position] + upstream
-      tss[[3]][tss_counter] <- data[[2]][position] + downstream
       tss[[4]][tss_counter] <- data[[4]][position]
       tss[[5]][tss_counter] <- data[[2]][position]
       tss[[6]][tss_counter] <- data[[6]][position]
       tss[[7]][tss_counter] <- data[[5]][position]
       tss[[8]][tss_counter] <- data[[10]][position]
+
+      if (identical(data[[6]][i], "+")){
+        tss[[2]][tss_counter] <- max(0, data[[2]][position] + upstream)
+        if (is.null(chrom_size)){
+          tss[[3]][tss_counter] <- data[[2]][position] + downstream
+        }else{
+          tss[[3]][tss_counter] <- min(chrom_size[data[[1]][i], ],
+                                       data[[2]][position] + downstream)
+        }
+      }else if (identical(data[[6]][i], "-")){
+        tss[[2]][tss_counter] <- max(0, data[[2]][position] - downstream)
+        if (is.null(chrom_size)){
+          tss[[3]][tss_counter] <- data[[2]][position] - upstream
+        }else
+          tss[[3]][tss_counter] <- min(chrom_size[data[[1]][i], ],
+                                       data[[2]][position] - upstream)
+      }
 
       LABEL   <- FALSE
       tss_ind <- vector(mode = "integer")  # Vector of tss indices
@@ -92,7 +96,8 @@ create_tss_regions <- function(data, chrom_size = NULL, upstream = -100,
 
   # Create a GRanges object
   promoter_data <- GenomicRanges::GRanges(seqnames = tss[[1]],
-                                          ranges    = IRanges::IRanges(start = tss[[2]], end = tss[[3]]),
+                                          ranges    = IRanges::IRanges(start = tss[[2]],
+                                                                       end = tss[[3]]),
                                           strand    = tss[[6]],
                                           gene_id   = tss[[4]],
                                           tss       = tss[[5]],

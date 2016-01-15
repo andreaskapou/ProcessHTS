@@ -37,11 +37,13 @@ read.rnaseq <- function(file, is_del_chrom = FALSE, is_list = TRUE){
                              "character"   # Metadata
                    ))
 
+
   # Extract FPKM from each gene --------------------------------
   message("Extracting FPKM...")
   for (i in 1:length(data_raw[[10]])){
     data_raw[[10]][i] <- extract_fpkm(data_raw[[10]][i])
   }
+
 
   # Sorting data -----------------------------------------------
   # According to the following order priority:
@@ -57,7 +59,8 @@ read.rnaseq <- function(file, is_del_chrom = FALSE, is_list = TRUE){
     data_raw[[entry]] <- data_raw[[entry]][Order]
   }
 
-  # Delete chromosomes X, Y and M -----------------------------------
+
+  # Delete chromosomes X, Y and M -----------------------------
   if (is_del_chrom){
     message("Removing X, Y and M chromosomes...")
 
@@ -70,16 +73,20 @@ read.rnaseq <- function(file, is_del_chrom = FALSE, is_list = TRUE){
     }
   }
 
+
+  # Return the RNA-Seq data as a list object ------------------
   if (is_list){
     message("Done!\n")
     return(data_raw)
   }
 
+
   # Create a GRanges object -----------------------------------
   message("Creating GRanges object...")
   expr_data <- GenomicRanges::GRanges(seqnames = data_raw[[1]],
                       strand = data_raw[[6]],
-                      ranges = IRanges::IRanges(start=data_raw[[2]], end=data_raw[[3]]),
+                      ranges = IRanges::IRanges(start=data_raw[[2]],
+                                                end=data_raw[[3]]),
                       gene_id = data_raw[[4]],
                       gene_expr = data_raw[[5]],
                       gene_fpkm = data_raw[[10]]

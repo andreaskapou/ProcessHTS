@@ -30,14 +30,14 @@ create_prom_regions <- function(data, chrom_size = NULL, upstream = -100,
 
   # Create list object for keeping unique promoter regions
   prom <- list()
-  prom[[1]] <- data[[1]]  # Reference chromosome
+  prom[[1]] <- data[[1]]                    # Reference chromosome
   prom[[2]] <- vector(mode = "integer", N)  # Start position in chromosome
   prom[[3]] <- vector(mode = "integer", N)  # End position in chromosome
-  prom[[4]] <- data[[4]]  # Gene ENSEMBL id
+  prom[[4]] <- data[[4]]                    # Gene ENSEMBL id
   prom[[5]] <- vector(mode = "integer", N)  # TSS position
-  prom[[6]] <- data[[6]]  # Strand: + or - or . for unknown
-  prom[[7]] <- data[[5]]  # Expression level
-  prom[[8]] <- data[[10]]  # Expression level in FPKM
+  prom[[6]] <- data[[6]]                    # Strand: + or - or . for unknown
+  prom[[7]] <- data[[5]]                    # Expression level
+  prom[[8]] <- data[[10]]                   # Expression level in FPKM
 
   for (i in 1:N){
     # Depending on strand we change the regions upstream and downstream of TSS
