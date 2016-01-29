@@ -14,7 +14,7 @@
 #'  Y and M.
 #' @param rrbs_cov Optional integer to disacrd low coverage reads.
 #' @param tss_data Logical, if the data read are TSS or gene
-#' @inheritParams create_meth_regions
+#' @inheritParams create_meth_reg
 #'
 #' @return A \code{methExpr} object which contains, among others the following
 #'  information:
@@ -36,35 +36,32 @@
 #'    corresponding gene expression data for each entry of the \code{meth_data} list.}
 #'  }
 #'
-#' @seealso \code{\link{read.rnaseq}}, \code{\link{read.rrbs}},
-#'  \code{\link{create_prom_regions}}, \code{\link{create_meth_regions}}
-#'
 #' @examples
 #' # Get the location of the files
-#' rrbs_file <- system.file("extdata", "rrbsH1hESC.bed", package = "processHTS")
-#' rnaseq_file <- system.file("extdata", "rnaseqH1hESC.bed", package = "processHTS")
-#' data <- meth_expr_data(rrbs_file, rnaseq_file)
+#' #rrbs_file <- system.file("extdata", "rrbsH1hESC.bed", package = "processHTS")
+#' #rnaseq_file <- system.file("extdata", "rnaseqH1hESC.bed", package = "processHTS")
+#' #data <- meth_expr_data(rrbs_file, rnaseq_file)
 #'
 #' @export
-meth_expr_data <- function(rrbs_file, rnaseq_file, chrom_size_file = NULL,
+meth_expr_data <- function(bs_file, rna_file, chrom_size_file = NULL,
                            upstream = -100, downstream = 100,
-                           num_CpG = 1, sd_thresh = 0, is_del_chrom = FALSE,
+                           num_CpG = 1, sd_thresh = 0, chr_discarded = NULL,
                            rrbs_cov = 0, ignore_strand = FALSE,
                            tss_data = FALSE, fmin = -1, fmax = 1){
 
-  # Process RRBS file and return data in the required format
-  rrbs_data <- read.rrbs(file         = rrbs_file,
-                         is_del_chrom = is_del_chrom,
-                         rrbs_cov     = rrbs_cov,
-                         is_list      = FALSE)
+
+  # Process BS-Seq file and return data in the required format
+  bs_data <- read_bs_encode_haib(file          = bs_file,
+                                 chr_discarded = chr_discarded,
+                                 is_GRanges    = TRUE)
   # Read RNA-Seq BED file
-  rnaseq_data <- read.rnaseq(file         = rnaseq_file,
-                             is_del_chrom = is_del_chrom,
-                             is_list      = TRUE)
+  rna_data <- read_rna_encode_caltech(file          = rna_file,
+                                      chr_discarded = chr_discarded,
+                                      is_GRanges    = TRUE)
 
   # Read the chromosome size file, if it is supplied
   if (!is.null(chrom_size_file)){
-    chrom_size <- read.chrom_size(file = chrom_size_file)
+    chrom_size <- read_chrom_size(file = chrom_size_file)
   }else{
     chrom_size <- NULL
   }
@@ -72,7 +69,7 @@ meth_expr_data <- function(rrbs_file, rnaseq_file, chrom_size_file = NULL,
   # Read TSS BED file and return a promoter region n upstream
   # and m downstream of Transcription Start Site (TSS)
   if (tss_data){
-    prom_data <- create_tss_regions(data       = rnaseq_data,
+    prom_data <- create_tss_reg(data       = rnaseq_data,
                                     chrom_size = chrom_size,
                                     upstream   = upstream,
                                     downstream = downstream)
@@ -87,7 +84,7 @@ meth_expr_data <- function(rrbs_file, rnaseq_file, chrom_size_file = NULL,
   rm(rnaseq_data)
 
   # Create methylation regions data
-  meth_regions <- create_meth_regions(rrbs_data     = rrbs_data,
+  meth_regions <- create_meth_reg(rrbs_data     = rrbs_data,
                                       promoter_data = prom_data,
                                       upstream      = upstream,
                                       downstream    = downstream,
