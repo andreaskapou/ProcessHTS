@@ -20,3 +20,11 @@
 #'
 #' @format A \code{\link[GenomicRanges]{GRanges}} object.
 "rrbs_data"
+
+
+#' Bismark Cov formatted BS-Seq example data
+#'
+#' Data coming from BS-Seq experiments in Bismark Cov format.
+#'
+#' @format A \code{\link[GenomicRanges]{GRanges}} object.
+"bs_data"
