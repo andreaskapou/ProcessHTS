@@ -13,7 +13,7 @@
 #' @param is_del_chrom Optional logical: if TRUE, delete chromosomes X,
 #'  Y and M.
 #' @param rrbs_cov Optional integer to disacrd low coverage reads.
-#' @inheritParams create_meth_regions
+#' @inheritParams create_meth_reg
 #'
 #' @return A \code{methExpr} object which contains, among others the following
 #'  information:
@@ -34,9 +34,6 @@
 #'    \item{ \code{expr_data}: A \code{\link[GenomicRanges]{GRanges}} object containing the
 #'    corresponding gene expression data for each entry of the \code{meth_data} list.}
 #'  }
-#'
-#' @seealso \code{\link{read.rnaseq}}, \code{\link{read.rrbs}},
-#'  \code{\link{create_prom_regions}}, \code{\link{create_meth_regions}}
 #'
 #' @export
 diff_meth_expr_data <- function(rrbs_files, rnaseq_files, chrom_size_file = NULL,
