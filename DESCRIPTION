@@ -12,7 +12,8 @@ LazyData: TRUE
 RoxygenNote: 5.0.1
 Imports: GenomicRanges,
     IRanges,
-    assertthat
+    assertthat,
+    S4Vectors
 Suggests: knitr,
     rmarkdown,
     testthat
