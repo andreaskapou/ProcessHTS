@@ -26,7 +26,7 @@ chromosome sizes}
 have to be in a methylated region. Regions with less than \code{n} CpGs
 are discarded.}
 
-\item{sd_thresh}{Opotional numeric defining the minimum standard deviation
+\item{sd_thresh}{Optional numeric defining the minimum standard deviation
 of the methylation change in a region.}
 
 \item{is_del_chrom}{Optional logical: if TRUE, delete chromosomes X,
@@ -63,9 +63,5 @@ A \code{methExpr} object which contains, among others the following
 \code{diff_meth_expr_data} is a wrapper method for processing HTS data and
 returning the methylation promoter regions and the corresponding gene
 expression levels for those promoter regions.
-}
-\seealso{
-\code{\link{read.rnaseq}}, \code{\link{read.rrbs}},
- \code{\link{create_prom_regions}}, \code{\link{create_meth_regions}}
 }
 
