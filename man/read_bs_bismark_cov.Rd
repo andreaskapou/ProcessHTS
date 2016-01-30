@@ -34,6 +34,6 @@ bs_data <- read_bs_bismark_cov(file=bismark_file, is_GRanges=TRUE)
 }
 \seealso{
 \code{\link{pool_bs_bismark_cov_rep}},
- \code{\link{process_bs_bismark_cov}}
+ \code{\link{preprocess_bs_bismark_cov}}
 }
 

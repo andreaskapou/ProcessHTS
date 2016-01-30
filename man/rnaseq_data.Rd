@@ -4,7 +4,7 @@
 \name{rnaseq_data}
 \alias{rnaseq_data}
 \title{RNA-Seq example data}
-\format{A list}
+\format{A data.frame}
 \usage{
 rnaseq_data
 }
