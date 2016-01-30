@@ -18,6 +18,7 @@
 #'
 #' @export
 pool_bs_bismark_cov_rep <- function(files, chr_discarded = NULL){
+  assertthat::assert_that(length(files) > 1)
   message("Pooling BS-Seq replicates ...")
 
   # Read first file
