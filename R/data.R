@@ -10,9 +10,15 @@
 #'
 #' Data coming from RNA sequencing experiments.
 #'
-#' @format A list
+#' @format A data.frame
 "rnaseq_data"
 
+#' Annotation example data
+#'
+#' Data containing gene annotation.
+#'
+#' @format A \code{\link[GenomicRanges]{GRanges}} object.
+"annot_data"
 
 #' RRBS example data
 #'
