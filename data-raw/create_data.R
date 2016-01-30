@@ -10,6 +10,11 @@ rnaseq_file <- system.file("extdata", "rnaseq.bed", package = "processHTS")
 rnaseq_data <- read_rna_encode_caltech(file=rnaseq_file, is_GRanges = FALSE)
 devtools::use_data(rnaseq_data, overwrite = TRUE)
 
+# Create annot data in GRanges format -----------
+rnaseq_file <- system.file("extdata", "rnaseq.bed", package = "processHTS")
+annot_data <- read_rna_encode_caltech(file=rnaseq_file, is_GRanges = TRUE)
+devtools::use_data(annot_data, overwrite = TRUE)
+
 
 # Create hg19 data --------------------------------
 hg19_file <- system.file("extdata", "hg19", package = "processHTS")
