@@ -10,7 +10,7 @@
 #'  is TRUE, otherwise a data.frame object.
 #'
 #' @seealso \code{\link{pool_bs_bismark_cov_rep}},
-#'  \code{\link{process_bs_bismark_cov}}
+#'  \code{\link{preprocess_bs_bismark_cov}}
 #'
 #' @references
 #'   \url{http://rnbeads.mpi-inf.mpg.de/data/RnBeads.pdf}

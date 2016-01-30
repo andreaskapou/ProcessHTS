@@ -30,7 +30,7 @@ read_bs_encode_haib <- function(file, chr_discarded = NULL, is_GRanges = TRUE){
                    sep="\t",
                    what=list("character",  # Reference chromosome or scaffold
                              integer(),    # Start position in chromosome
-                             integer(),    # End position in chromosome
+                             NULL,         # End position in chromosome
                              NULL,         # Name of item
                              integer(),    # Score from 0-1000. Capped number
                              "character",  # Strand : + or - or . for unknown
