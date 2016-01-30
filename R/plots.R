@@ -7,8 +7,8 @@
 #' @export
 plot_prom_cpg_density <- function(obj){
   prom <- vector(mode = "numeric")
-  for (i in 1:length(obj$meth_data)){
-    prom[i] <- length(obj$meth_data[[i]])
+  for (i in 1:length(obj$methyl_region)){
+    prom[i] <- length(obj$methyl_region[[i]])
   }
   plot(density(prom),
        col = "darkblue",
@@ -25,8 +25,8 @@ plot_prom_cpg_density <- function(obj){
 #' @export
 plot_prom_cpg_hist <- function(obj){
   prom <- vector(mode = "numeric")
-  for (i in 1:length(obj$meth_data)){
-    prom[i] <- length(obj$meth_data[[i]])
+  for (i in 1:length(obj$methyl_region)){
+    prom[i] <- length(obj$methyl_region[[i]])
   }
   hist(prom,
        border = "darkblue",
