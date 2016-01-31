@@ -53,7 +53,7 @@ read_bs_encode_haib <- function(file, chr_discarded = NULL, is_GRanges = TRUE){
   rm(data_raw)
 
 
-  # Remove selected chromosomes  ------------------------------
+  # Remove selected chromosomes  -------------------------------
   bs_data <- discard_chr(x = bs_data, chr_discarded = chr_discarded)
 
 

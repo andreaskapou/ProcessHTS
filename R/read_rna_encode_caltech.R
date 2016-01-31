@@ -61,13 +61,13 @@ read_rna_encode_caltech <- function(file, chr_discarded = NULL,
   rm(data_raw)
 
 
-  # Remove selected chromosomes  ------------------------------
+  # Remove selected chromosomes  -------------------------------
   rna_data <- discard_chr(x = rna_data, chr_discarded = chr_discarded)
 
 
   # Sorting data -----------------------------------------------
   # With order priority: 1. chr, 2. start, 3. strand
-  message("Sorting BS-Seq data ...")
+  message("Sorting RNA-Seq data ...")
   rna_data <- rna_data[with(rna_data, order(rna_data$chr,
                                             rna_data$start,
                                             rna_data$strand)), ]

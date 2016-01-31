@@ -28,10 +28,11 @@ read_bs_bismark_cov <- function(file, chr_discarded = NULL, is_GRanges = TRUE){
                         sep = "\t",
                         col.names = c("chr", "start",
                                       "meth_reads", "unmeth_reads"),
-                        comment.char = "")
+                        comment.char = "",
+                        stringsAsFactors = FALSE)
 
 
-  # Remove selected chromosomes  ------------------------------
+  # Remove selected chromosomes  -------------------------------
   bs_data <- discard_chr(x = bs_data, chr_discarded = chr_discarded)
 
 

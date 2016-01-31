@@ -44,19 +44,19 @@ read_annot_beatson <- function(file, chr_discarded = NULL,
   # Store only required fields
   annot_data <- data.frame(chr = data_raw[[1]], start = data_raw[[8]],
                            end = data_raw[[9]], strand = strand_dir,
-                           gene_name = data_raw[[4]],
                            ensembl_id = data_raw[[6]],
+                           gene_name = data_raw[[4]],
                            stringsAsFactors = FALSE)
   rm(data_raw)
 
 
-  # Remove selected chromosomes  ------------------------------
+  # Remove selected chromosomes  -------------------------------
   annot_data <- discard_chr(x = annot_data, chr_discarded = chr_discarded)
 
 
   # Sorting data -----------------------------------------------
   # With order priority: 1. chr, 2. start, 3. strand
-  message("Sorting BS-Seq data ...")
+  message("Sorting annotation data ...")
   annot_data <- annot_data[with(annot_data, order(annot_data$chr,
                                                   annot_data$start,
                                                   annot_data$strand)), ]
