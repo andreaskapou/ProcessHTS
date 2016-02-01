@@ -48,12 +48,12 @@ read_rna_beatson <- function(file, chr_discarded = NULL,
     # Create a GRanges object -----------------------------------
     message("Creating GRanges object ...")
     rna_data <- GenomicRanges::GRanges(seqnames = rna_data$chr,
-                                       strand = rna_data$strand,
-                                       ranges = IRanges::IRanges(start = rna_data$start,
-                                                                 end = rna_data$end),
-                                       ensembl_id = rna_data$ensembl_id,
-                                       gene_name  = rna_data$gene_name,
-                                       gene_fpkm  = rna_data$gene_fpkm)
+                       strand = rna_data$strand,
+                       ranges = IRanges::IRanges(start = rna_data$start,
+                                                 end = rna_data$end),
+                       ensembl_id = rna_data$ensembl_id,
+                       gene_name  = rna_data$gene_name,
+                       gene_fpkm  = rna_data$gene_fpkm)
   }
   message("Done!\n")
   return(rna_data)
