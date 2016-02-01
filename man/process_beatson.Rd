@@ -28,6 +28,19 @@ chromosome sizes}
 \item{min_bs_cov}{The minimum number of reads mapping to each CpG site.}
 
 \item{max_bs_cov}{The maximum number of reads mapping to each CpG site.}
+
+\item{cpg_density}{Optional integer defining the minimum number of CpGs that
+have to be in a methylated region. Regions with less than \code{n} CpGs
+are discarded.}
+
+\item{sd_thresh}{Optional numeric defining the minimum standard deviation
+of the methylation change in a region.}
+
+\item{ignore_strand}{Logical, whether or not to ignore strand information.}
+
+\item{fmin}{Optional minimum range value for region location scaling.}
+
+\item{fmax}{Optional maximum range value for region location scaling.}
 }
 \value{
 A \code{processHTS} object which contains among others the following

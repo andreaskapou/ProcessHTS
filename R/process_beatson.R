@@ -4,7 +4,18 @@
 #' returning the methylation promoter regions and the corresponding gene
 #' expression data for those promoter regions.
 #'
-#' @inheritParams process_haib_caltech
+#' @param bs_files The name of the BS-Seq '.bed' formatted file to read
+#'  data values from.
+#' @param rna_files The name of the RNA-Seq '.bed' formatted file to
+#'  read data values from.
+#' @param chrom_size_file Optional name of the file containing genome
+#'  chromosome sizes
+#' @param chr_discarded A vector with chromosome names to be discarded.
+#' @param upstream Integer defining the length of bp upstream of TSS.
+#' @param downstream Integer defining the length of bp downstream of TSS.
+#' @param min_bs_cov The minimum number of reads mapping to each CpG site.
+#' @param max_bs_cov The maximum number of reads mapping to each CpG site.
+#' @inheritParams create_methyl_region
 #'
 #' @return A \code{processHTS} object which contains among others the following
 #'  information:
