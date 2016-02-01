@@ -21,4 +21,9 @@ The reduced Granges object without noisy observations
  from BS-Seq experiments. These reads can be thought as noise of the
  experiment.
 }
+\examples{
+bs_data_noisy  <- rrbs_data
+bs_data <- discard_bs_noise_reads(bs_data_noisy, 4, 14)
+
+}
 

@@ -4,7 +4,7 @@
 \alias{preprocess_bs_bismark_cov}
 \title{Process BS-Seq data in Bismark cov format}
 \usage{
-preprocess_bs_bismark_cov(files, chr_discarded = NULL, min_bs_cov = 0,
+preprocess_bs_bismark_cov(files, chr_discarded = NULL, min_bs_cov = 2,
   max_bs_cov = 1000)
 }
 \arguments{

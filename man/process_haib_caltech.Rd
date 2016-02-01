@@ -2,7 +2,7 @@
 % Please edit documentation in R/process_haib_caltech.R
 \name{process_haib_caltech}
 \alias{process_haib_caltech}
-\title{Wrapper method for processing ENCODE HAIB and Caltech HTS data.}
+\title{Wrapper method for processing ENCODE HAIB and Caltech HTS data}
 \usage{
 process_haib_caltech(bs_files, rna_files, chrom_size_file = NULL,
   chr_discarded = NULL, upstream = -100, downstream = 100,
@@ -43,30 +43,37 @@ of the methylation change in a region.}
 \item{fmax}{Optional maximum range value for region location scaling.}
 }
 \value{
-A \code{methExpr} object which contains, among others the following
+A \code{processHTS} object which contains among others the following
  information:
  \itemize{
-   \item{ \code{meth_data}: A list containing the methylation data, where each
-     each entry in the list consists of an L X 3 dimensional matrix, where:
+   \item{ \code{methyl_region}: A list containing the methylation regions,
+     where each each entry in the list consists of an L X 3 dimensional
+     matrix, where:
      \enumerate{
-       \item{ 1st column: Contains the locations of the CpGs relative to TSS,
+       \item{ 1st col: Contains the locations of the CpGs relative to TSS,
          where the range (min, max) of possible values is given, by the
          inputs fmin and fmax.
        }
-       \item{ 2nd column: The total reads of the CpG in the corresponding
+       \item{ 2nd col: The total reads of the CpG in the corresponding
          location.}
-       \item{ 3rd column: The methylated reads of the CpG in the corresponding
+       \item{ 3rd col: The methylated reads of the CpG in the corresponding
          location.}
      }
    }
-   \item{ \code{expr_data}: A \code{\link[GenomicRanges]{GRanges}} object containing the
-   corresponding gene expression data for each entry of the \code{meth_data} list.}
+   \item{ \code{prom_region}: A \code{\link[GenomicRanges]{GRanges}} object
+     containing corresponding annotated promoter regions for each entry of
+     the \code{methyl_region} list..
+
+   }
+   \item{ \code{rna_data}: A \code{\link[GenomicRanges]{GRanges}} object
+     containing the corresponding RNA-Seq data for each entry of the
+     \code{methyl_region} list.}
  }
 }
 \description{
 \code{process_haib_caltech} is a wrapper method for processing HTS data and
 returning the methylation promoter regions and the corresponding gene
-expression levels for those promoter regions.
+expression data for those promoter regions.
 }
 \examples{
 # Get the location of the files

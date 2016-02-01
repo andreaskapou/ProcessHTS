@@ -108,12 +108,17 @@ discard_chr <- function(x, chr_discarded = NULL){
 #'
 #' @return The reduced Granges object without noisy observations
 #'
+#' @examples
+#' bs_data_noisy  <- rrbs_data
+#' bs_data <- discard_bs_noise_reads(bs_data_noisy, 4, 14)
+#'
 #' @export
 discard_bs_noise_reads <- function(bs_data, min_bs_cov = 2, max_bs_cov = 1000){
 
   message("Discarding noisy reads ...")
   bs_data <- subset(bs_data,
-                    bs_data$total_reads > min_bs_cov &
-                    bs_data$total_reads < max_bs_cov)
+                    bs_data$total_reads >= min_bs_cov)
+  bs_data <- subset(bs_data,
+                    bs_data$total_reads <= max_bs_cov)
   return(bs_data)
 }
