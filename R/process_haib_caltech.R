@@ -1,8 +1,8 @@
-#' Wrapper method for processing ENCODE HAIB and Caltech HTS data.
+#' Wrapper method for processing ENCODE HAIB and Caltech HTS data
 #'
 #' \code{process_haib_caltech} is a wrapper method for processing HTS data and
 #' returning the methylation promoter regions and the corresponding gene
-#' expression levels for those promoter regions.
+#' expression data for those promoter regions.
 #'
 #' @param bs_files The name of the BS-Seq '.bed' formatted file to read
 #'  data values from.
@@ -17,24 +17,31 @@
 #' @param max_bs_cov The maximum number of reads mapping to each CpG site.
 #' @inheritParams create_methyl_region
 #'
-#' @return A \code{methExpr} object which contains, among others the following
+#' @return A \code{processHTS} object which contains among others the following
 #'  information:
 #'  \itemize{
-#'    \item{ \code{meth_data}: A list containing the methylation data, where each
-#'      each entry in the list consists of an L X 3 dimensional matrix, where:
+#'    \item{ \code{methyl_region}: A list containing the methylation regions,
+#'      where each each entry in the list consists of an L X 3 dimensional
+#'      matrix, where:
 #'      \enumerate{
-#'        \item{ 1st column: Contains the locations of the CpGs relative to TSS,
+#'        \item{ 1st col: Contains the locations of the CpGs relative to TSS,
 #'          where the range (min, max) of possible values is given, by the
 #'          inputs fmin and fmax.
 #'        }
-#'        \item{ 2nd column: The total reads of the CpG in the corresponding
+#'        \item{ 2nd col: The total reads of the CpG in the corresponding
 #'          location.}
-#'        \item{ 3rd column: The methylated reads of the CpG in the corresponding
+#'        \item{ 3rd col: The methylated reads of the CpG in the corresponding
 #'          location.}
 #'      }
 #'    }
-#'    \item{ \code{expr_data}: A \code{\link[GenomicRanges]{GRanges}} object containing the
-#'    corresponding gene expression data for each entry of the \code{meth_data} list.}
+#'    \item{ \code{prom_region}: A \code{\link[GenomicRanges]{GRanges}} object
+#'      containing corresponding annotated promoter regions for each entry of
+#'      the \code{methyl_region} list..
+#'
+#'    }
+#'    \item{ \code{rna_data}: A \code{\link[GenomicRanges]{GRanges}} object
+#'      containing the corresponding RNA-Seq data for each entry of the
+#'      \code{methyl_region} list.}
 #'  }
 #'
 #' @examples
@@ -70,6 +77,7 @@ process_haib_caltech <- function(bs_files, rna_files, chrom_size_file = NULL,
                                       chr_discarded = chr_discarded,
                                       is_GRanges    = TRUE)
 
+  # Create promoter regions
   prom_reg <- create_prom_region(annot_data = rna_data,
                                  chrom_size = chrom_size,
                                  upstream   = upstream,

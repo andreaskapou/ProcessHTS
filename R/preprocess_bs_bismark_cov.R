@@ -22,7 +22,7 @@
 #'
 #' @export
 preprocess_bs_bismark_cov <- function(files, chr_discarded = NULL,
-                                      min_bs_cov = 0, max_bs_cov = 1000){
+                                      min_bs_cov = 2, max_bs_cov = 1000){
 
   # Read BS-Seq data in Bismark Cov format ---------------
   if (length(files) > 1){
