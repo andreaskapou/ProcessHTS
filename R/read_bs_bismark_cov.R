@@ -1,13 +1,13 @@
 #' Read file containing Bismark Cov formatted BS-Seq data
 #'
 #' \code{read_bs_bismark_cov} reads a file containing methylation data from
-#'  BS-Seq experiments using the \code{\link{scan}} function. The BS-Seq file
-#' should be in Bismark Cov format.
+#'  BS-Seq experiments using the \code{\link[data.table]{fread}} function.
+#'  The BS-Seq file should be in Bismark Cov format.
 #'
 #' @inheritParams read_bs_encode_haib
 #'
 #' @return a \code{\link[GenomicRanges]{GRanges}} object if \code{is_GRanges}
-#'  is TRUE, otherwise a data.frame object.
+#'  is TRUE, otherwise a \code{\link[data.table]{data.table}} object.
 #'
 #' @seealso \code{\link{pool_bs_bismark_cov_rep}},
 #'  \code{\link{preprocess_bs_bismark_cov}}
@@ -23,13 +23,11 @@
 #' @export
 read_bs_bismark_cov <- function(file, chr_discarded = NULL, is_GRanges = TRUE){
   message("Reading file ", file, " ...")
-  bs_data <- read.table(file = file,
-                        header = FALSE,
-                        sep = "\t",
-                        col.names = c("chr", "start",
-                                      "meth_reads", "unmeth_reads"),
-                        comment.char = "",
-                        stringsAsFactors = FALSE)
+  bs_data <- data.table::fread(input = file,
+                               sep = "\t",
+                               header = FALSE,
+                               col.names = c("chr", "start", "meth_reads",
+                                             "unmeth_reads"))
 
 
   # Remove selected chromosomes  -------------------------------
@@ -39,11 +37,7 @@ read_bs_bismark_cov <- function(file, chr_discarded = NULL, is_GRanges = TRUE){
   # Sorting data -----------------------------------------------
   # With order priority: 1. chr, 2. start
   message("Sorting BS-Seq data ...")
-  bs_data <- bs_data[with(bs_data, order(bs_data$chr,
-                                         bs_data$start)), ]
-
-  # Get sequential row numbers
-  row.names(bs_data) <- NULL
+  bs_data <- bs_data[order(bs_data$chr, bs_data$start)]
 
 
   if (is_GRanges){
