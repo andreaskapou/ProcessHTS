@@ -1,8 +1,8 @@
 #' Read file containing ENCODE HAIB \code{bed} formatted BS-Seq data
 #'
 #' \code{read_bs_encode_haib} reads a file containing methylation data from
-#' BS-Seq experiments using the \code{\link{scan}} function. The BS-Seq file
-#' should be in ENCODE HAIB \code{bed} format.
+#' BS-Seq experiments using the \code{\link{scan}} function.
+#' The BS-Seq file should be in ENCODE HAIB \code{bed} format.
 #'
 #' @param file The name of the file to read data values from.
 #' @param chr_discarded A vector with chromosome names to be discarded.
@@ -10,7 +10,7 @@
 #'  a data.frame object is returned.
 #'
 #' @return a \code{\link[GenomicRanges]{GRanges}} object if \code{is_GRanges}
-#'  is TRUE, otherwise a data.frame object.
+#'  is TRUE, otherwise a \code{\link[data.table]{data.table}} object.
 #'
 #' @seealso \code{\link{read_chrom_size}}, \code{\link{read_rna_encode_caltech}}
 #'
@@ -20,7 +20,7 @@
 #' @examples
 #' # Get the location of the RRBS file
 #' rrbs_file <- system.file("extdata", "rrbs.bed", package = "processHTS")
-#' bs_data <- read_bs_encode_haib(file=rrbs_file, is_GRanges=TRUE)
+#' bs_data <- read_bs_encode_haib(file=rrbs_file, chr_discarded = "chr1", is_GRanges=FALSE)
 #'
 #' @export
 read_bs_encode_haib <- function(file, chr_discarded = NULL, is_GRanges = TRUE){
@@ -47,9 +47,11 @@ read_bs_encode_haib <- function(file, chr_discarded = NULL, is_GRanges = TRUE){
 
 
   # Store only required fields
-  bs_data <- data.frame(chr = data_raw[[1]], start = data_raw[[2]],
-                        strand = data_raw[[6]], total_reads = data_raw[[5]],
-                        meth_reads = data_raw[[11]], stringsAsFactors = FALSE)
+  bs_data <- data.table::data.table(chr = data_raw[[1]],
+                                    start = data_raw[[2]],
+                                    strand = data_raw[[6]],
+                                    total_reads = data_raw[[5]],
+                                    meth_reads = data_raw[[11]])
   rm(data_raw)
 
 
@@ -60,12 +62,7 @@ read_bs_encode_haib <- function(file, chr_discarded = NULL, is_GRanges = TRUE){
   # Sorting data -----------------------------------------------
   # With order priority: 1. chr, 2. start, 3. strand
   message("Sorting BS-Seq data ...")
-  bs_data <- bs_data[with(bs_data, order(bs_data$chr,
-                                         bs_data$start,
-                                         bs_data$strand)), ]
-
-  # Get sequential row numbers
-  row.names(bs_data) <- NULL
+  bs_data <- bs_data[order(bs_data$chr, bs_data$start, bs_data$strand)]
 
 
   if (is_GRanges){
