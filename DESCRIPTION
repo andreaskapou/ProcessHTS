@@ -13,7 +13,8 @@ RoxygenNote: 5.0.1
 Imports: GenomicRanges,
     IRanges,
     assertthat,
-    S4Vectors
+    S4Vectors,
+	data.table
 Suggests: knitr,
     rmarkdown,
     testthat
