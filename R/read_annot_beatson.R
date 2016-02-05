@@ -6,7 +6,7 @@
 #' @inheritParams read_bs_encode_haib
 #'
 #' @return a \code{\link[GenomicRanges]{GRanges}} object if \code{is_GRanges}
-#'  is TRUE, otherwise a data.frame object.
+#'  is TRUE, otherwise a \code{\link[data.table]{data.table}} object.
 #'
 #' @seealso \code{\link{read_chrom_size}}, \code{\link{read_bs_encode_haib}}
 #'
@@ -16,38 +16,18 @@
 #' annot_beatson_data <- read_annot_beatson(file=annot_beatson_file, is_GRanges=TRUE)
 #'
 #' @export
-read_annot_beatson <- function(file, chr_discarded = NULL,
-                                        is_GRanges = TRUE){
+read_annot_beatson <- function(file, chr_discarded = NULL, is_GRanges = TRUE){
   message("Reading file ", file, " ...")
-  data_raw <- scan(file=file,
-                   sep="\t",
-                   what=list("character",  # Reference chromosome
-                             NULL,         # M kb upstream
-                             NULL,         # N kb downstream
-                             "character",  # Gene name
-                             numeric(),    # Strand direction, 1 or -1
-                             "character",  # Ensembl ID
-                             NULL,         # Reference chromosome (again)
-                             integer(),    # Start position in chromosome
-                             integer(),    # End position in chromosome
-                             NULL,         # Strand direction (again)
-                             NULL,         # Gene name (again)
-                             NULL,         # Gene type
-                             NULL          # Gene status
-                   ))
+  annot_data <- data.table::fread(input = file,
+                                  sep = "\t",
+                                  header = FALSE,
+                                  col.names = c("chr", "gene_name", "strand",
+                                                "ensembl_id", "start", "end"),
+                                  drop = c(2:3, 7, 10:13))
 
   # Convert strand direction to '+' and '-'
-  strand_dir <- vector(mode = "character", length(data_raw[[5]]))
-  strand_dir[which(data_raw[[5]] == 1)] <- "+"
-  strand_dir[which(data_raw[[5]] == -1)] <- "-"
-
-  # Store only required fields
-  annot_data <- data.frame(chr = data_raw[[1]], start = data_raw[[8]],
-                           end = data_raw[[9]], strand = strand_dir,
-                           ensembl_id = data_raw[[6]],
-                           gene_name = data_raw[[4]],
-                           stringsAsFactors = FALSE)
-  rm(data_raw)
+  annot_data$strand[annot_data[, annot_data$strand == 1]] <- "+"
+  annot_data$strand[annot_data[, annot_data$strand == -1]] <- "-"
 
 
   # Remove selected chromosomes  -------------------------------
@@ -57,11 +37,9 @@ read_annot_beatson <- function(file, chr_discarded = NULL,
   # Sorting data -----------------------------------------------
   # With order priority: 1. chr, 2. start, 3. strand
   message("Sorting annotation data ...")
-  annot_data <- annot_data[with(annot_data, order(annot_data$chr,
-                                                  annot_data$start,
-                                                  annot_data$strand)), ]
-  # Get sequential row numbers
-  row.names(annot_data) <- NULL
+  annot_data <- annot_data[order(annot_data$chr,
+                                 annot_data$start,
+                                 annot_data$strand)]
 
 
   if (is_GRanges){
