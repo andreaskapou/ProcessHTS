@@ -58,7 +58,7 @@ create_prom_region <- function(annot_data, chrom_size = NULL, upstream = -100,
       if (is.null(chrom_size)){
         down_prom[i] <- annot_start[i] + downstream
       }else{
-        down_prom[i] <- min(chrom_size[annot_chr[i], ],
+        down_prom[i] <- min(chrom_size[chrom_size$chr == annot_chr[i]]$size,
                             annot_start[i] + downstream)
       }
     }else if (identical(annot_strand[i], "-")){
@@ -73,7 +73,7 @@ create_prom_region <- function(annot_data, chrom_size = NULL, upstream = -100,
       if (is.null(chrom_size)){
         down_prom[i] <- annot_end[i] - upstream
       }else{
-        down_prom[i] <- min(chrom_size[annot_chr[i], ],
+        down_prom[i] <- min(chrom_size[chrom_size$chr == annot_chr[i]]$size,
                             annot_end[i] - upstream)
       }
     }
