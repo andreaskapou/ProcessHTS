@@ -79,17 +79,18 @@ extract_gene_name <- function(x){
 #'
 #' \code{discard_chr} Discards selected chromosomes
 #'
-#' @param x The HTS data stored in a data frame object
+#' @param x The HTS data stored in a data.table object
 #' @param chr_discarded A vector with chromosome names to be discarded.
 #'
 #' @return The reduced HTS data.
 #'
 #' @export
 discard_chr <- function(x, chr_discarded = NULL){
+  assertthat::assert_that(is(x, "data.table"))
   if (!is.null(chr_discarded)){
     message("Removing selected chromosomes ...")
     for (i in 1:length(chr_discarded)){
-      x <- subset(x, x$chr != chr_discarded[i])
+      x <- x[x$chr != chr_discarded[i]]
     }
   }
   return(x)
