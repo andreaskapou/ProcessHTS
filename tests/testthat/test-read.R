@@ -7,9 +7,9 @@ test_that("erros are thrown", {
 })
 
 test_that("returns required output", {
-  out <- read_rna_encode_caltech(rnaseq_file, is_GRanges=TRUE)
-  expect_is(out, "GRanges")
+   out <- read_rna_encode_caltech(rnaseq_file, is_GRanges=TRUE)
+   expect_is(out, "GRanges")
 
-  out <- read_rna_encode_caltech(rnaseq_file, is_GRanges=FALSE)
-  expect_is(out, "data.frame")
+   out <- read_rna_encode_caltech(rnaseq_file, is_GRanges=FALSE)
+   expect_is(out, "data.table")
 })
