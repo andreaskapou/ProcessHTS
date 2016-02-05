@@ -9,5 +9,7 @@
 #'
 #' @docType package
 #' @name processHTS
+#'
+.datatable.aware=TRUE
 NULL
 #> NULL
