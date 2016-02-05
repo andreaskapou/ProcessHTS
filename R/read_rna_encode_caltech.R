@@ -38,10 +38,12 @@ read_rna_encode_caltech <- function(file, chr_discarded = NULL,
 
 
   # Store only required fields
-  rna_data <- data.frame(chr = data_raw[[1]], start = data_raw[[2]],
-                         end = data_raw[[3]], strand = data_raw[[6]],
-                         ensembl_id = data_raw[[4]], gene_expr = data_raw[[5]],
-                         stringsAsFactors = FALSE)
+  rna_data <- data.table::data.table(chr = data_raw[[1]],
+                                     start = data_raw[[2]],
+                                     end = data_raw[[3]],
+                                     strand = data_raw[[6]],
+                                     ensembl_id = data_raw[[4]],
+                                     gene_expr = data_raw[[5]])
 
 
   # Extract FPKM and gene name from each gene ------------------
@@ -56,8 +58,9 @@ read_rna_encode_caltech <- function(file, chr_discarded = NULL,
   }
 
   # Store extracted data to data.frame
-  rna_data <- data.frame(rna_data, fpkm = fpkm, gene_name = gene_name,
-                         stringsAsFactors = FALSE)
+  rna_data <- data.table::data.table(rna_data,
+                                     fpkm = fpkm,
+                                     gene_name = gene_name)
   rm(data_raw)
 
 
@@ -68,12 +71,7 @@ read_rna_encode_caltech <- function(file, chr_discarded = NULL,
   # Sorting data -----------------------------------------------
   # With order priority: 1. chr, 2. start, 3. strand
   message("Sorting RNA-Seq data ...")
-  rna_data <- rna_data[with(rna_data, order(rna_data$chr,
-                                            rna_data$start,
-                                            rna_data$strand)), ]
-
-  # Get sequential row numbers
-  row.names(rna_data) <- NULL
+  rna_data <- rna_data[order(rna_data$chr, rna_data$start, rna_data$strand)]
 
 
   if (is_GRanges){
