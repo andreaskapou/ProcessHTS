@@ -16,7 +16,7 @@ a data.frame object is returned.}
 }
 \value{
 a \code{\link[GenomicRanges]{GRanges}} object if \code{is_GRanges}
- is TRUE, otherwise a data.frame object.
+ is TRUE, otherwise a \code{\link[data.table]{data.table}} object.
 }
 \description{
 \code{read_annot_beatson} reads a file containing gene annotation data from

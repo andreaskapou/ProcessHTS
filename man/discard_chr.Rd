@@ -7,7 +7,7 @@
 discard_chr(x, chr_discarded = NULL)
 }
 \arguments{
-\item{x}{The HTS data stored in a data frame object}
+\item{x}{The HTS data stored in a data.table object}
 
 \item{chr_discarded}{A vector with chromosome names to be discarded.}
 }

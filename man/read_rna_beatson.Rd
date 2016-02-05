@@ -16,17 +16,17 @@ a data.frame object is returned.}
 }
 \value{
 a \code{\link[GenomicRanges]{GRanges}} object if \code{is_GRanges}
- is TRUE, otherwise a data.frame object.
+ is TRUE, otherwise a \code{\link[data.table]{data.table}} object.
 }
 \description{
 \code{read_rna_beatson} reads a file containing promoter annotation
 data together with gene expression levels from RNA-Seq experiments using the
-\code{\link{scan}} function.
+\code{\link[data.table]{fread}} function.
 }
 \examples{
 # Get the location of the RNA-Seq file
 rna_beatson_file <- system.file("extdata", "rna_beatson.bed", package = "processHTS")
-rna_beatson_data <- read_rna_beatson(file=rna_beatson_file, is_GRanges=TRUE)
+rna_beatson_data <- read_rna_beatson(file=rna_beatson_file, chr_discarded = "chrX", is_GRanges=TRUE)
 
 }
 \seealso{

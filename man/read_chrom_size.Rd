@@ -10,16 +10,16 @@ read_chrom_size(file)
 \item{file}{The name of the file to read data values from.}
 }
 \value{
-data frame.
+A \code{\link[data.table]{data.table}} object.
 }
 \description{
-\code{read_chrom_size} reads a file containing genome chromosome sizes
-using the \code{\link{scan}} function.
+\code{read_chrom_size} reads a file containing genome chromosome sizes using
+ the \code{\link{scan}} function.
 }
 \examples{
 # Get the location of the hg19 file
 hg19_file <- system.file("extdata", "hg19", package = "processHTS")
-data <- read_chrom_size(file=hg19_file)
+hg_data <- read_chrom_size(file=hg19_file)
 
 \dontrun{
 read.chrom_size(20)
@@ -27,6 +27,7 @@ read.chrom_size(20)
 
 }
 \seealso{
-\code{\link{read_rna_encode_caltech}}, \code{\link{read_bs_encode_haib}}
+\code{\link{read_rna_encode_caltech}},
+ \code{\link{read_bs_encode_haib}}
 }
 

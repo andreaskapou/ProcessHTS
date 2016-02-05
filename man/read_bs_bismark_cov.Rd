@@ -16,12 +16,12 @@ a data.frame object is returned.}
 }
 \value{
 a \code{\link[GenomicRanges]{GRanges}} object if \code{is_GRanges}
- is TRUE, otherwise a data.frame object.
+ is TRUE, otherwise a \code{\link[data.table]{data.table}} object.
 }
 \description{
 \code{read_bs_bismark_cov} reads a file containing methylation data from
- BS-Seq experiments using the \code{\link{scan}} function. The BS-Seq file
-should be in Bismark Cov format.
+ BS-Seq experiments using the \code{\link[data.table]{fread}} function.
+ The BS-Seq file should be in Bismark Cov format.
 }
 \examples{
 # Get the location of the bismark file
