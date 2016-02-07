@@ -46,9 +46,9 @@
 #'
 #' @examples
 #' # Get the location of the files
-#' rrbs_file <- system.file("extdata", "rrbsH1hESC.bed", package = "processHTS")
-#' rnaseq_file <- system.file("extdata", "rnaseqH1hESC.bed", package = "processHTS")
-#' data <- process_haib_caltech(rrbs_file, rnaseq_file)
+#' bs_file <- system.file("extdata", "bism_rep1.bed", package = "processHTS")
+#' rna_file <- system.file("extdata", "rna_beatson.bed", package = "processHTS")
+#' #data <- process_beatson(bs_file, rna_file)
 #'
 #' @export
 process_beatson <- function(bs_files, rna_files, chrom_size_file = NULL,
