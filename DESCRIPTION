@@ -14,7 +14,9 @@ Imports: GenomicRanges,
     IRanges,
     assertthat,
     S4Vectors,
-	data.table
+	data.table,
+    BiocGenerics,
+    graphics
 Suggests: knitr,
     rmarkdown,
     testthat
