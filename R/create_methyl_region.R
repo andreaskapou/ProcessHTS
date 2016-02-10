@@ -49,14 +49,15 @@
 #'
 #' meth_regions <- create_methyl_region(bs_data, prom_reg)
 #'
+#' @importFrom stats sd
 #' @export
 create_methyl_region <- function(bs_data, prom_region, cpg_density = 1,
                                  sd_thresh = 0, ignore_strand = FALSE,
                                                   fmin = -1, fmax = 1){
 
   message("Creating methylation regions ...")
-  #assertthat::assert_that(is(bs_data, "GRanges"))
-  #assertthat::assert_that(is(prom_region, "GRanges"))
+  assertthat::assert_that(identical(class(bs_data)[1], "GRanges"))
+  assertthat::assert_that(identical(class(prom_region)[1], "GRanges"))
 
   # Find overlaps between promoter regions and BS-Seq data -------
   overlaps <- GenomicRanges::findOverlaps(query   = prom_region,
@@ -71,7 +72,8 @@ create_methyl_region <- function(bs_data, prom_region, cpg_density = 1,
   query_hits <- S4Vectors::queryHits(overlaps)
   subj_hits  <- S4Vectors::subjectHits(overlaps)
 
-  prom_loc   <- unique(query_hits)     # Indices of promoter locations
+  # Indices of promoter locations
+  prom_loc   <- BiocGenerics::unique(query_hits)
   tss_loc    <- prom_region$tss        # TSS locations
   tss_strand <- as.character(GenomicRanges::strand(prom_region))
   cpg_loc    <- GenomicRanges::ranges(bs_data)@start  # CpG locations
@@ -132,7 +134,7 @@ create_methyl_region <- function(bs_data, prom_region, cpg_density = 1,
                                      strand_direction = strand_direction)
 
           # In the "-" strand the order of the locations should change
-          Order <- order(center_data)
+          Order <- base::order(center_data)
 
           meth_data[[n]] <- matrix(0, nrow = length(cpg_ind), ncol = 3)
 

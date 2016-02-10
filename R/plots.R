@@ -10,7 +10,7 @@ plot_prom_cpg_density <- function(obj){
   for (i in 1:length(obj$methyl_region)){
     prom[i] <- length(obj$methyl_region[[i]])
   }
-  plot(density(prom),
+  plot(stats::density(prom),
        col = "darkblue",
        main = "Distribution of # CpGs in promoter regions")
 }
@@ -22,6 +22,7 @@ plot_prom_cpg_density <- function(obj){
 #'
 #' @param obj Object of type 'methExpr'
 #'
+#' @importFrom graphics hist
 #' @export
 plot_prom_cpg_hist <- function(obj){
   prom <- vector(mode = "numeric")

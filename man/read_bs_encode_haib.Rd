@@ -26,7 +26,7 @@ The BS-Seq file should be in ENCODE HAIB \code{bed} format.
 \examples{
 # Get the location of the RRBS file
 rrbs_file <- system.file("extdata", "rrbs.bed", package = "processHTS")
-bs_data <- read_bs_encode_haib(file=rrbs_file, chr_discarded = "chr1", is_GRanges=FALSE)
+bs_data <- read_bs_encode_haib(file=rrbs_file, chr_discarded = "chr1", is_GRanges=TRUE)
 
 }
 \references{
