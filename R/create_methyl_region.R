@@ -55,8 +55,8 @@ create_methyl_region <- function(bs_data, prom_region, cpg_density = 1,
                                                   fmin = -1, fmax = 1){
 
   message("Creating methylation regions ...")
-  assertthat::assert_that(methods::is(bs_data, "GRanges"))
-  assertthat::assert_that(methods::is(prom_region, "GRanges"))
+  #assertthat::assert_that(is(bs_data, "GRanges"))
+  #assertthat::assert_that(is(prom_region, "GRanges"))
 
   # Find overlaps between promoter regions and BS-Seq data -------
   overlaps <- GenomicRanges::findOverlaps(query   = prom_region,

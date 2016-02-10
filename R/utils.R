@@ -86,7 +86,7 @@ extract_gene_name <- function(x){
 #'
 #' @export
 discard_chr <- function(x, chr_discarded = NULL){
-  assertthat::assert_that(methods::is(x, "data.table"))
+  #assertthat::assert_that(is(x, "data.table"))
   if (!is.null(chr_discarded)){
     message("Removing selected chromosomes ...")
     for (i in 1:length(chr_discarded)){
