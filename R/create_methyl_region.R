@@ -50,6 +50,7 @@
 #' meth_regions <- create_methyl_region(bs_data, prom_reg)
 #'
 #' @importFrom stats sd
+#' @importFrom methods is
 #' @export
 create_methyl_region <- function(bs_data, prom_region, cpg_density = 1,
                                  sd_thresh = 0, ignore_strand = FALSE,
@@ -57,6 +58,7 @@ create_methyl_region <- function(bs_data, prom_region, cpg_density = 1,
 
   message("Creating methylation regions ...")
   assertthat::assert_that(identical(class(bs_data)[1], "GRanges"))
+  assertthat::assert_that(methods::is(bs_data, "GRanges"))
   assertthat::assert_that(identical(class(prom_region)[1], "GRanges"))
 
   # Find overlaps between promoter regions and BS-Seq data -------
@@ -73,7 +75,7 @@ create_methyl_region <- function(bs_data, prom_region, cpg_density = 1,
   subj_hits  <- S4Vectors::subjectHits(overlaps)
 
   # Indices of promoter locations
-  prom_loc   <- BiocGenerics::unique(query_hits)
+  prom_loc   <- unique(query_hits)
   tss_loc    <- prom_region$tss        # TSS locations
   tss_strand <- as.character(GenomicRanges::strand(prom_region))
   cpg_loc    <- GenomicRanges::ranges(bs_data)@start  # CpG locations

@@ -117,9 +117,12 @@ discard_chr <- function(x, chr_discarded = NULL){
 discard_bs_noise_reads <- function(bs_data, min_bs_cov = 2, max_bs_cov = 1000){
 
   message("Discarding noisy reads ...")
-  bs_data <- BiocGenerics::subset(bs_data,
+  bs_data <- subset(bs_data,
                                   bs_data$total_reads >= min_bs_cov)
-  bs_data <- BiocGenerics::subset(bs_data,
+  bs_data <- subset(bs_data,
                                   bs_data$total_reads <= max_bs_cov)
   return(bs_data)
 }
+
+#  ------------------------------------------------------------------------
+
