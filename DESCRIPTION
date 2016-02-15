@@ -16,7 +16,8 @@ Imports: GenomicRanges,
     S4Vectors,
     graphics,
     data.table,
-    methods
+    methods,
+    stats
 Suggests: knitr,
     rmarkdown,
     testthat
