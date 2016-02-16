@@ -86,7 +86,7 @@ extract_gene_name <- function(x){
 #'
 #' @export
 discard_chr <- function(x, chr_discarded = NULL){
-  assertthat::assert_that(identical(class(x)[1], "data.table"))
+  assertthat::assert_that(methods::is(x, "data.table"))
   if (!is.null(chr_discarded)){
     message("Removing selected chromosomes ...")
     for (i in 1:length(chr_discarded)){
@@ -113,14 +113,13 @@ discard_chr <- function(x, chr_discarded = NULL){
 #' bs_data_noisy  <- rrbs_data
 #' bs_data <- discard_bs_noise_reads(bs_data_noisy, 4, 14)
 #'
+#' @importFrom methods is
 #' @export
 discard_bs_noise_reads <- function(bs_data, min_bs_cov = 2, max_bs_cov = 1000){
 
   message("Discarding noisy reads ...")
-  bs_data <- subset(bs_data,
-                                  bs_data$total_reads >= min_bs_cov)
-  bs_data <- subset(bs_data,
-                                  bs_data$total_reads <= max_bs_cov)
+  bs_data <- subset(bs_data, bs_data$total_reads >= min_bs_cov)
+  bs_data <- subset(bs_data, bs_data$total_reads <= max_bs_cov)
   return(bs_data)
 }
 

@@ -19,12 +19,13 @@
 #' ann_data <- annot_data
 #' prom_regions <- create_prom_region(ann_data)
 #'
+#' @importFrom methods is
 #' @export
 create_prom_region <- function(annot_data, chrom_size = NULL, upstream = -100,
                                                             downstream = 100){
 
   message("Creating promoter regions ...")
-  assertthat::assert_that(identical(class(annot_data)[1], "GRanges"))
+  assertthat::assert_that(methods::is(annot_data, "GRanges"))
   N <- NROW(annot_data)  # Number of genes
   if (upstream > 0 ){
     upstream <- -upstream
