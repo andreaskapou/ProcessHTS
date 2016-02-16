@@ -10,6 +10,8 @@
 #' @docType package
 #' @name processHTS
 #'
+#' @import GenomicRanges
+#'
 .datatable.aware=TRUE
 NULL
 #> NULL

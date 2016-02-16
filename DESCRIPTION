@@ -7,10 +7,10 @@ Authors@R: person("C. A.", "Kapourani", email = "c.a.kapourani@sms.ed.ac.uk",
                   role = c("aut", "cre"))
 Description: Packages to read and process data files containing High-Throughput Sequencing experiments, e.g. RRBS and RNA-Seq.
 License: GPL-3
-Depends: R (>= 3.2.0)
+Depends: R (>= 3.2.0), GenomicRanges
 LazyData: TRUE
 RoxygenNote: 5.0.1
-Imports: GenomicRanges,
+Imports:
     IRanges,
     assertthat,
     S4Vectors,
