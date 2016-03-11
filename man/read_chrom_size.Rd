@@ -14,7 +14,7 @@ A \code{\link[data.table]{data.table}} object.
 }
 \description{
 \code{read_chrom_size} reads a file containing genome chromosome sizes using
- the \code{\link{scan}} function.
+ the \code{\link[data.table]{fread}} function.
 }
 \examples{
 # Get the location of the hg19 file

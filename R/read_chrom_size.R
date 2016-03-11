@@ -1,7 +1,7 @@
 #' Read file containing genome chromosome sizes.
 #'
 #' \code{read_chrom_size} reads a file containing genome chromosome sizes using
-#'  the \code{\link{scan}} function.
+#'  the \code{\link[data.table]{fread}} function.
 #'
 #' @param file The name of the file to read data values from.
 #'
