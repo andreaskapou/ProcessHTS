@@ -12,6 +12,8 @@
 #' @param chr_discarded A vector with chromosome names to be discarded.
 #' @param upstream Integer defining the length of bp upstream of TSS.
 #' @param downstream Integer defining the length of bp downstream of TSS.
+#' @param unique_tss Logical, indicating if CGIs should match only to unique
+#'  TSS, default false, so as to consider strand direction.
 #'
 #' @return The remaining CGIs which intersect with promoter regions stored in a
 #'  \code{\link[GenomicRanges]{GRanges}} object.
@@ -21,7 +23,7 @@
 #' @export
 intersect_cgi_tss <- function(cgi_file, rna_files, chrom_size_file = NULL,
                               chr_discarded = NULL, upstream = -100,
-                                                  downstream = 100){
+                              downstream = 100, unique_tss = FALSE){
 
   cgi_data <- read_encode_cgi(file = cgi_file,
                               is_GRanges = TRUE)
@@ -44,18 +46,30 @@ intersect_cgi_tss <- function(cgi_file, rna_files, chrom_size_file = NULL,
                                     upstream   = upstream,
                                     downstream = downstream)
 
+
   # Find overlaps between promoter regions and CGI data
   overlaps <- GenomicRanges::findOverlaps(query   = cgi_data,
                                           subject = prom_region,
-                                          select = "first",
                                           ignore.strand = TRUE)
 
-  # Get only the subset of overlapping CpG islands
-  keep_non_na <- which(!is.na(overlaps))
-  cgi_data <- cgi_data[keep_non_na]
+  if (! unique_tss){
+  # Get only the subset of overlapping CpG sites
+  cgi_data <- cgi_data[S4Vectors::queryHits(overlaps)]
+  # Add the corresponding ensembl ids
+  cgi_data$ensembl_id <- rna_data[S4Vectors::subjectHits(overlaps)]$ensembl_id
+  }else{
+    # Find overlaps between promoter regions and CGI data
+    overlaps <- GenomicRanges::findOverlaps(query   = cgi_data,
+                                            subject = prom_region,
+                                            select = "first",
+                                            ignore.strand = TRUE)
 
-  # Add the methylated reads from the two distinct replicates
-  cgi_data$ensembl_id <- rna_data[overlaps[keep_non_na]]$ensembl_id
+    # Get only the subset of overlapping CpG islands
+    keep_non_na <- which(!is.na(overlaps))
+    cgi_data <- cgi_data[keep_non_na]
+    # Add the corresponding ensembl ids
+    cgi_data$ensembl_id <- rna_data[overlaps[keep_non_na]]$ensembl_id
+  }
 
   return(cgi_data)
 }

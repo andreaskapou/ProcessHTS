@@ -5,7 +5,8 @@
 \title{Keep CGIs that intersect with promoter regions}
 \usage{
 intersect_cgi_tss(cgi_file, rna_files, chrom_size_file = NULL,
-  chr_discarded = NULL, upstream = -100, downstream = 100)
+  chr_discarded = NULL, upstream = -100, downstream = 100,
+  unique_tss = FALSE)
 }
 \arguments{
 \item{cgi_file}{The name of the CGI '.bed' formatted file to read
@@ -22,6 +23,9 @@ chromosome sizes}
 \item{upstream}{Integer defining the length of bp upstream of TSS.}
 
 \item{downstream}{Integer defining the length of bp downstream of TSS.}
+
+\item{unique_tss}{Logical, indicating if CGIs should match only to unique
+TSS, default false, so as to consider strand direction.}
 }
 \value{
 The remaining CGIs which intersect with promoter regions stored in a
