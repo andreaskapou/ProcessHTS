@@ -92,8 +92,12 @@ process_diff_beatson <- function(bs_contr_files, bs_treat_files,
                                 fmax            = fmax)
 
   # Find overlaps between control and treatment data
-  overlaps <- GenomicRanges::findOverlaps(query   = contr_data$prom_region,
-                                          subject = treat_data$prom_region)
+  overlaps <- GenomicRanges::findOverlaps(query   = contr_data$rna_data,
+                                          subject = treat_data$rna_data,
+                                          select  = "first")
+
+  # Get only the subset of overlapping control data
+  keep_non_na <- which(!is.na(overlaps))
 
   # Create final object
   obj <- structure(list(contr       = list(),
@@ -107,16 +111,16 @@ process_diff_beatson <- function(bs_contr_files, bs_treat_files,
                    class = "diff_processHTS")
 
   # Keep only methylation regions that overlap on both control and treatment cases
-  obj$contr$methyl_region <- contr_data$methyl_region[S4Vectors::queryHits(overlaps)]
-  obj$treat$methyl_region <- treat_data$methyl_region[S4Vectors::subjectHits(overlaps)]
+  obj$contr$methyl_region <- contr_data$methyl_region[keep_non_na]
+  obj$treat$methyl_region <- treat_data$methyl_region[overlaps[keep_non_na]]
 
   # Keep only promoter regions that overlap on both control and treatment cases
-  obj$contr$prom_region <- contr_data$prom_region[S4Vectors::queryHits(overlaps)]
-  obj$treat$prom_region <- treat_data$prom_region[S4Vectors::subjectHits(overlaps)]
+  obj$contr$prom_region <- contr_data$prom_region[keep_non_na]
+  obj$treat$prom_region <- treat_data$prom_region[overlaps[keep_non_na]]
 
   # Keep only RNA-Seq data that overlap on both control and treatment cases
-  obj$contr$rna_data <- contr_data$rna_data[S4Vectors::queryHits(overlaps)]
-  obj$treat$rna_data <- treat_data$rna_data[S4Vectors::subjectHits(overlaps)]
+  obj$contr$rna_data <- contr_data$rna_data[keep_non_na]
+  obj$treat$rna_data <- treat_data$rna_data[overlaps[keep_non_na]]
 
   return(obj)
 }
