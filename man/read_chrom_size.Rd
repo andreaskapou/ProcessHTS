@@ -2,7 +2,7 @@
 % Please edit documentation in R/read_chrom_size.R
 \name{read_chrom_size}
 \alias{read_chrom_size}
-\title{Read file containing genome chromosome sizes.}
+\title{Read genome chromosome sizes file.}
 \usage{
 read_chrom_size(file)
 }
@@ -25,6 +25,9 @@ hg_data <- read_chrom_size(file=hg19_file)
 read.chrom_size(20)
 }
 
+}
+\author{
+C.A.Kapourani \email{C.A.Kapourani@ed.ac.uk}
 }
 \seealso{
 \code{\link{read_rna_encode_caltech}},
