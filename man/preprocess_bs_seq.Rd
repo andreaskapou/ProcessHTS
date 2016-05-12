@@ -55,6 +55,9 @@ bs_files <- c(bs_file1, bs_file2)
 pool_data <- preprocess_bs_seq(files=bs_files, file_format="bismark_cov")
 
 }
+\author{
+C.A.Kapourani \email{C.A.Kapourani@ed.ac.uk}
+}
 \seealso{
 \code{\link{read_bs_bismark_cov}}, \code{\link{read_bs_encode_haib}}
   \code{\link{pool_bs_seq_rep}}

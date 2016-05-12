@@ -29,6 +29,8 @@
 #' @seealso \code{\link{read_bs_bismark_cov}}, \code{\link{read_bs_encode_haib}}
 #'   \code{\link{pool_bs_seq_rep}}
 #'
+#' @author C.A.Kapourani \email{C.A.Kapourani@@ed.ac.uk}
+#'
 #' @examples
 #' ####
 #' bs_file1 <- system.file("extdata", "rrbs.bed", package = "processHTS")
