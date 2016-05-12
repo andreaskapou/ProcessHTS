@@ -13,6 +13,8 @@
 #' @return The scaled data in the given range, default is between (0, 1). If
 #'  xmin = xmax the input vector \code{data} is returned.
 #'
+#' @author C.A.Kapourani \email{C.A.Kapourani@@ed.ac.uk}
+#'
 #' @examples
 #' data <- c(-20, 0, 15, 20)
 #' scaled <- minmax_scaling(data)
@@ -43,6 +45,8 @@ minmax_scaling <- function(data, xmin = NULL, xmax = NULL, fmin = 0, fmax = 1){
 #'
 #' @return The FPKM numeric value
 #'
+#' @author C.A.Kapourani \email{C.A.Kapourani@@ed.ac.uk}
+#'
 #' @examples
 #' data <- 'gene_id "72"; transcr "ENST00000456328"; FPKM "0.0736851531";'
 #' scaled <- extract_fpkm(data)
@@ -62,6 +66,8 @@ extract_fpkm <- function(x){
 #' @param x a string containing gene name information
 #'
 #' @return The gene name as a string
+#'
+#' @author C.A.Kapourani \email{C.A.Kapourani@@ed.ac.uk}
 #'
 #' @examples
 #' data <- 'gene_name "Bnt1.1"; transcr "ENST00000456328"; FPKM "0.0736831";'
@@ -84,6 +90,8 @@ extract_gene_name <- function(x){
 #'
 #' @return The reduced HTS data.
 #'
+#' @author C.A.Kapourani \email{C.A.Kapourani@@ed.ac.uk}
+#'
 #' @export
 discard_chr <- function(x, chr_discarded = NULL){
   assertthat::assert_that(methods::is(x, "data.table"))
@@ -103,11 +111,13 @@ discard_chr <- function(x, chr_discarded = NULL){
 #'  from BS-Seq experiments. These reads can be thought as noise of the
 #'  experiment.
 #'
-#' @param bs_data A Granges object containing the BS-Seq data.
+#' @param bs_data A GRanges object containing the BS-Seq data.
 #' @param min_bs_cov The minimum number of reads mapping to each CpG site.
 #' @param max_bs_cov The maximum number of reads mapping to each CpG site.
 #'
-#' @return The reduced Granges object without noisy observations
+#' @return The clean GRanges object without noisy observations
+#'
+#' @author C.A.Kapourani \email{C.A.Kapourani@@ed.ac.uk}
 #'
 #' @examples
 #' bs_data_noisy  <- rrbs_data

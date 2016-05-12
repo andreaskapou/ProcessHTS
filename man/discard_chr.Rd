@@ -17,4 +17,7 @@ The reduced HTS data.
 \description{
 \code{discard_chr} Discards selected chromosomes
 }
+\author{
+C.A.Kapourani \email{C.A.Kapourani@ed.ac.uk}
+}
 

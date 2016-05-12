@@ -7,14 +7,14 @@
 discard_bs_noise_reads(bs_data, min_bs_cov = 2, max_bs_cov = 1000)
 }
 \arguments{
-\item{bs_data}{A Granges object containing the BS-Seq data.}
+\item{bs_data}{A GRanges object containing the BS-Seq data.}
 
 \item{min_bs_cov}{The minimum number of reads mapping to each CpG site.}
 
 \item{max_bs_cov}{The maximum number of reads mapping to each CpG site.}
 }
 \value{
-The reduced Granges object without noisy observations
+The clean GRanges object without noisy observations
 }
 \description{
 \code{discard_bs_noise_reads} discards low coverage and (really) high reads
@@ -25,5 +25,8 @@ The reduced Granges object without noisy observations
 bs_data_noisy  <- rrbs_data
 bs_data <- discard_bs_noise_reads(bs_data_noisy, 4, 14)
 
+}
+\author{
+C.A.Kapourani \email{C.A.Kapourani@ed.ac.uk}
 }
 

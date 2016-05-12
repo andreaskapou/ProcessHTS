@@ -31,4 +31,7 @@ data <- c(-20, 0, 15, 20)
 scaled <- minmax_scaling(data)
 
 }
+\author{
+C.A.Kapourani \email{C.A.Kapourani@ed.ac.uk}
+}
 

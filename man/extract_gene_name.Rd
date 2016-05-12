@@ -20,4 +20,7 @@ data <- 'gene_name "Bnt1.1"; transcr "ENST00000456328"; FPKM "0.0736831";'
 scaled <- extract_gene_name(data)
 
 }
+\author{
+C.A.Kapourani \email{C.A.Kapourani@ed.ac.uk}
+}
 

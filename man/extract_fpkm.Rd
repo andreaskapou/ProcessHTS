@@ -20,4 +20,7 @@ data <- 'gene_id "72"; transcr "ENST00000456328"; FPKM "0.0736851531";'
 scaled <- extract_fpkm(data)
 
 }
+\author{
+C.A.Kapourani \email{C.A.Kapourani@ed.ac.uk}
+}
 
