@@ -2,7 +2,7 @@
 % Please edit documentation in R/read_bs_bismark_cov.R
 \name{read_bs_bismark_cov}
 \alias{read_bs_bismark_cov}
-\title{Read file containing Bismark Cov formatted BS-Seq data}
+\title{Read Bismark Cov formatted BS-Seq file}
 \usage{
 read_bs_bismark_cov(file, chr_discarded = NULL, is_GRanges = TRUE)
 }
@@ -11,29 +11,41 @@ read_bs_bismark_cov(file, chr_discarded = NULL, is_GRanges = TRUE)
 
 \item{chr_discarded}{A vector with chromosome names to be discarded.}
 
-\item{is_GRanges}{Logical: if TRUE a GRanges object is returned, otherwise
-a data.frame object is returned.}
+\item{is_GRanges}{Logical: if TRUE a GRanges object is returned, otherwise a
+data.frame object is returned.}
 }
 \value{
-a \code{\link[GenomicRanges]{GRanges}} object if \code{is_GRanges}
- is TRUE, otherwise a \code{\link[data.table]{data.table}} object.
+a \code{\link[GenomicRanges]{GRanges}} object if \code{is_GRanges} is
+  TRUE, otherwise a \code{\link[data.table]{data.table}} object.
+
+  The GRanges object contains two additional metadata columns: \itemize{
+  \item \code{total_reads}: total reads mapped to each genomic location.
+  \item \code{meth_reads}: methylated reads mapped to each genomic location.
+  } These columns can be accessed as follows:
+  \code{granges_object$total_reads}
 }
 \description{
 \code{read_bs_bismark_cov} reads a file containing methylation data from
- BS-Seq experiments using the \code{\link[data.table]{fread}} function.
- The BS-Seq file should be in Bismark Cov format.
+BS-Seq experiments using the \code{\link[data.table]{fread}} function. The
+BS-Seq file should be in Bismark Cov format. Read the Important section below
+on when using this function.
+}
+\section{Important}{
+ Unless you want to create a different workflow when
+  processing the BS-Seq data, you should NOT call this function, since this
+  is a helper function. Instead you should call the
+  \code{\link{preprocess_bs_seq}} function.
 }
 \examples{
 # Get the location of the bismark file
-bismark_file <- system.file("extdata", "bism_rep1.bed", package = "processHTS")
-bs_data <- read_bs_bismark_cov(file=bismark_file, is_GRanges=TRUE)
+bism_file <- system.file("extdata", "bism_rep1.bed", package = "processHTS")
+bs_data <- read_bs_bismark_cov(file = bism_file, is_GRanges = TRUE)
 
 }
 \references{
 \url{http://rnbeads.mpi-inf.mpg.de/data/RnBeads.pdf}
 }
 \seealso{
-\code{\link{pool_bs_bismark_cov_rep}},
- \code{\link{preprocess_bs_bismark_cov}}
+\code{\link{pool_bs_seq_rep}}, \code{\link{preprocess_bs_seq}}
 }
 

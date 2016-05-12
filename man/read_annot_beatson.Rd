@@ -11,8 +11,8 @@ read_annot_beatson(file, chr_discarded = NULL, is_GRanges = TRUE)
 
 \item{chr_discarded}{A vector with chromosome names to be discarded.}
 
-\item{is_GRanges}{Logical: if TRUE a GRanges object is returned, otherwise
-a data.frame object is returned.}
+\item{is_GRanges}{Logical: if TRUE a GRanges object is returned, otherwise a
+data.frame object is returned.}
 }
 \value{
 a \code{\link[GenomicRanges]{GRanges}} object if \code{is_GRanges}
