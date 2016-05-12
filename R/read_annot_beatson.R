@@ -1,12 +1,19 @@
-#' Read file containing gene annotation data from Beatson
+#' Read gene annotation file from Beatson
 #'
 #' \code{read_annot_beatson} reads a file containing gene annotation data from
 #' Beatson, using the \code{\link{scan}} function.
 #'
 #' @inheritParams read_bs_encode_haib
 #'
-#' @return a \code{\link[GenomicRanges]{GRanges}} object if \code{is_GRanges}
-#'  is TRUE, otherwise a \code{\link[data.table]{data.table}} object.
+#' @return A \code{\link[GenomicRanges]{GRanges}} object if \code{is_GRanges} is
+#'   TRUE, otherwise a \code{\link[data.table]{data.table}} object.
+#'
+#'   The GRanges object contains two additional metadata columns: \itemize{
+#'   \item \code{ensembl_id}: Ensembl IDs of each gene promoter. \item
+#'   \code{gene_name}: Gene name. } These columns can be accessed as follows:
+#'   \code{granges_object$ensembl_id}
+#'
+#' @author C.A.Kapourani \email{C.A.Kapourani@@ed.ac.uk}
 #'
 #' @seealso \code{\link{read_chrom_size}}, \code{\link{read_bs_encode_haib}}
 #'
@@ -52,6 +59,6 @@ read_annot_beatson <- function(file, chr_discarded = NULL, is_GRanges = TRUE){
                          ensembl_id = annot_data$ensembl_id,
                          gene_name  = annot_data$gene_name)
   }
-  message("Done!\n")
+  message("Finished reading annotation file!\n")
   return(annot_data)
 }

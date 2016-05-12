@@ -2,7 +2,7 @@
 % Please edit documentation in R/read_annot_beatson.R
 \name{read_annot_beatson}
 \alias{read_annot_beatson}
-\title{Read file containing gene annotation data from Beatson}
+\title{Read gene annotation file from Beatson}
 \usage{
 read_annot_beatson(file, chr_discarded = NULL, is_GRanges = TRUE)
 }
@@ -15,8 +15,13 @@ read_annot_beatson(file, chr_discarded = NULL, is_GRanges = TRUE)
 data.frame object is returned.}
 }
 \value{
-a \code{\link[GenomicRanges]{GRanges}} object if \code{is_GRanges}
- is TRUE, otherwise a \code{\link[data.table]{data.table}} object.
+A \code{\link[GenomicRanges]{GRanges}} object if \code{is_GRanges} is
+  TRUE, otherwise a \code{\link[data.table]{data.table}} object.
+
+  The GRanges object contains two additional metadata columns: \itemize{
+  \item \code{ensembl_id}: Ensembl IDs of each gene promoter. \item
+  \code{gene_name}: Gene name. } These columns can be accessed as follows:
+  \code{granges_object$ensembl_id}
 }
 \description{
 \code{read_annot_beatson} reads a file containing gene annotation data from
@@ -27,6 +32,9 @@ Beatson, using the \code{\link{scan}} function.
 annot_beatson_file <- system.file("extdata", "annot_beatson.bed", package = "processHTS")
 annot_beatson_data <- read_annot_beatson(file=annot_beatson_file, is_GRanges=TRUE)
 
+}
+\author{
+C.A.Kapourani \email{C.A.Kapourani@ed.ac.uk}
 }
 \seealso{
 \code{\link{read_chrom_size}}, \code{\link{read_bs_encode_haib}}
