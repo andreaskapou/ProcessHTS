@@ -35,6 +35,9 @@ The remaining CGIs which intersect with promoter regions stored in a
 \code{intersect_cgi_tss} keeps only CpG islands that overlap with promoter
  regions \code{N} bp upstream and \code{M} bp downstream of TSS.
 }
+\author{
+C.A.Kapourani \email{C.A.Kapourani@ed.ac.uk}
+}
 \seealso{
 \code{\link{create_prom_region}}
 }

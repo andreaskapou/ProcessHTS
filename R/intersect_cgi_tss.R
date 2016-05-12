@@ -18,6 +18,8 @@
 #' @return The remaining CGIs which intersect with promoter regions stored in a
 #'  \code{\link[GenomicRanges]{GRanges}} object.
 #'
+#' @author C.A.Kapourani \email{C.A.Kapourani@@ed.ac.uk}
+#'
 #' @seealso \code{\link{create_prom_region}}
 #'
 #' @export
@@ -53,15 +55,15 @@ intersect_cgi_tss <- function(cgi_file, rna_files, chrom_size_file = NULL,
                                           ignore.strand = TRUE)
 
   if (! unique_tss){
-  # Get only the subset of overlapping CpG sites
-  cgi_data <- cgi_data[S4Vectors::queryHits(overlaps)]
-  # Add the corresponding ensembl ids
-  cgi_data$ensembl_id <- rna_data[S4Vectors::subjectHits(overlaps)]$ensembl_id
+    # Get only the subset of overlapping CpG sites
+    cgi_data <- cgi_data[S4Vectors::queryHits(overlaps)]
+    # Add the corresponding ensembl ids
+    cgi_data$ensembl_id <- rna_data[S4Vectors::subjectHits(overlaps)]$ensembl_id
   }else{
     # Find overlaps between promoter regions and CGI data
     overlaps <- GenomicRanges::findOverlaps(query   = cgi_data,
                                             subject = prom_region,
-                                            select = "first",
+                                            select  = "first",
                                             ignore.strand = TRUE)
 
     # Get only the subset of overlapping CpG islands
