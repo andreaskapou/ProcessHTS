@@ -7,7 +7,7 @@
 #'
 #' @inheritParams read_bs_encode_haib
 #'
-#' @return a \code{\link[GenomicRanges]{GRanges}} object if \code{is_GRanges} is
+#' @return A \code{\link[GenomicRanges]{GRanges}} object if \code{is_GRanges} is
 #'   TRUE, otherwise a \code{\link[data.table]{data.table}} object.
 #'
 #'   The GRanges object contains two additional metadata columns: \itemize{
@@ -58,6 +58,6 @@ read_bs_bismark_cov <- function(file, chr_discarded = NULL, is_GRanges = TRUE){
                       total_reads = bs_data$meth_reads + bs_data$unmeth_reads,
                       meth_reads  = bs_data$meth_reads)
   }
-  message("Done!\n")
+  message("Finished reading BS-Seq file!\n")
   return(bs_data)
 }

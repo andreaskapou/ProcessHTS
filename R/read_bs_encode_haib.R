@@ -10,7 +10,7 @@
 #' @param is_GRanges Logical: if TRUE a GRanges object is returned, otherwise a
 #'   data.frame object is returned.
 #'
-#' @return a \code{\link[GenomicRanges]{GRanges}} object if \code{is_GRanges} is
+#' @return A \code{\link[GenomicRanges]{GRanges}} object if \code{is_GRanges} is
 #'   TRUE, otherwise a \code{\link[data.table]{data.table}} object.
 #'
 #'   The GRanges object contains two additional metadata columns: \itemize{
@@ -19,10 +19,10 @@
 #'   } These columns can be accessed as follows:
 #'   \code{granges_object$total_reads}
 #'
-#' @section Important:
-#'   Unless you want to create a different workflow when processing the BS-Seq
-#'   data, you should NOT call this function, since this is a helper function.
-#'   Instead you should call the \code{\link{preprocess_bs_seq}} function.
+#' @section Important: Unless you want to create a different workflow when
+#'   processing the BS-Seq data, you should NOT call this function, since this
+#'   is a helper function. Instead you should call the
+#'   \code{\link{preprocess_bs_seq}} function.
 #'
 #' @seealso \code{\link{pool_bs_seq_rep}}, \code{\link{preprocess_bs_seq}}
 #'
@@ -32,8 +32,7 @@
 #' @examples
 #' # Get the location of the RRBS file
 #' rrbs_file <- system.file("extdata", "rrbs.bed", package = "processHTS")
-#' bs_data <- read_bs_encode_haib(file=rrbs_file, chr_discarded = "chr1",
-#'                                                      is_GRanges = TRUE)
+#' bs_data <- read_bs_encode_haib(file = rrbs_file, chr_discarded = "chr1", is_GRanges = TRUE)
 #'
 #' @export
 read_bs_encode_haib <- function(file, chr_discarded = NULL, is_GRanges = TRUE){
@@ -87,6 +86,6 @@ read_bs_encode_haib <- function(file, chr_discarded = NULL, is_GRanges = TRUE){
                       total_reads = bs_data$total_reads,
                       meth_reads  = bs_data$meth_reads)
   }
-  message("Done!\n")
+  message("Finished reading BS-Seq file!\n")
   return(bs_data)
 }
