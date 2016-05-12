@@ -3,7 +3,7 @@
 #' \code{read_bs_encode_haib} reads a file containing methylation data from
 #' BS-Seq experiments using the \code{\link{scan}} function. The BS-Seq file
 #' should be in ENCODE HAIB \code{bed} format. Read the Important section below
-#' on when using this function.
+#' on when to use this function.
 #'
 #' @param file The name of the file to read data values from.
 #' @param chr_discarded A vector with chromosome names to be discarded.
@@ -24,10 +24,12 @@
 #'   is a helper function. Instead you should call the
 #'   \code{\link{preprocess_bs_seq}} function.
 #'
-#' @seealso \code{\link{pool_bs_seq_rep}}, \code{\link{preprocess_bs_seq}}
+#' @author C.A.Kapourani \email{C.A.Kapourani@@ed.ac.uk}
 #'
 #' @references
 #' \url{http://rohsdb.cmb.usc.edu/GBshape/cgi-bin/hgTables?db=hg19&hgta_group=regulation&hgta_track=wgEncodeHaibMethylRrbs&hgta_table=wgEncodeHaibMethylRrbsBcbreast0203015BiochainSitesRep2&hgta_doSchema=describe+table+schema}
+#'
+#' @seealso \code{\link{pool_bs_seq_rep}}, \code{\link{preprocess_bs_seq}}
 #'
 #' @examples
 #' # Get the location of the RRBS file

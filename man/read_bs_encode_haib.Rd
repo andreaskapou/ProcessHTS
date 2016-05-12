@@ -28,7 +28,7 @@ A \code{\link[GenomicRanges]{GRanges}} object if \code{is_GRanges} is
 \code{read_bs_encode_haib} reads a file containing methylation data from
 BS-Seq experiments using the \code{\link{scan}} function. The BS-Seq file
 should be in ENCODE HAIB \code{bed} format. Read the Important section below
-on when using this function.
+on when to use this function.
 }
 \section{Important}{
  Unless you want to create a different workflow when
@@ -41,6 +41,9 @@ on when using this function.
 rrbs_file <- system.file("extdata", "rrbs.bed", package = "processHTS")
 bs_data <- read_bs_encode_haib(file = rrbs_file, chr_discarded = "chr1", is_GRanges = TRUE)
 
+}
+\author{
+C.A.Kapourani \email{C.A.Kapourani@ed.ac.uk}
 }
 \references{
 \url{http://rohsdb.cmb.usc.edu/GBshape/cgi-bin/hgTables?db=hg19&hgta_group=regulation&hgta_track=wgEncodeHaibMethylRrbs&hgta_table=wgEncodeHaibMethylRrbsBcbreast0203015BiochainSitesRep2&hgta_doSchema=describe+table+schema}
