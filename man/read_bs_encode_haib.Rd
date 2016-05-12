@@ -15,7 +15,7 @@ read_bs_encode_haib(file, chr_discarded = NULL, is_GRanges = TRUE)
 data.frame object is returned.}
 }
 \value{
-a \code{\link[GenomicRanges]{GRanges}} object if \code{is_GRanges} is
+A \code{\link[GenomicRanges]{GRanges}} object if \code{is_GRanges} is
   TRUE, otherwise a \code{\link[data.table]{data.table}} object.
 
   The GRanges object contains two additional metadata columns: \itemize{
@@ -31,16 +31,15 @@ should be in ENCODE HAIB \code{bed} format. Read the Important section below
 on when using this function.
 }
 \section{Important}{
-
-  Unless you want to create a different workflow when processing the BS-Seq
-  data, you should NOT call this function, since this is a helper function.
-  Instead you should call the \code{\link{preprocess_bs_seq}} function.
+ Unless you want to create a different workflow when
+  processing the BS-Seq data, you should NOT call this function, since this
+  is a helper function. Instead you should call the
+  \code{\link{preprocess_bs_seq}} function.
 }
 \examples{
 # Get the location of the RRBS file
 rrbs_file <- system.file("extdata", "rrbs.bed", package = "processHTS")
-bs_data <- read_bs_encode_haib(file=rrbs_file, chr_discarded = "chr1",
-                                                     is_GRanges = TRUE)
+bs_data <- read_bs_encode_haib(file = rrbs_file, chr_discarded = "chr1", is_GRanges = TRUE)
 
 }
 \references{

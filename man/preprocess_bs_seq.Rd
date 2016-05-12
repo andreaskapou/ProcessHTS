@@ -11,7 +11,8 @@ preprocess_bs_seq(files, file_format = "encode_rrbs", chr_discarded = NULL,
 \item{files}{A vector of filenames containing replicate experiments.}
 
 \item{file_format}{A string denoting the file format that the BS-Seq data are
-stored.}
+stored. Current version allows "\code{encode_rrbs}" or "\code{bismark_cov}"
+formats.}
 
 \item{chr_discarded}{A vector with chromosome names to be discarded.}
 
@@ -30,6 +31,15 @@ A \code{\link[GenomicRanges]{GRanges}} object. The GRanges object
 \code{preprocess_bs_seq} is a general function for reading and preprocessing
 BS-Seq data. If a vector of files is given, these are considered as
 replicates and are pooled together. Finally, noisy reads are discarded.
+}
+\section{Additional Info}{
+ Information about the file formats can be found in
+  the following links:
+
+  Encode RRBS format:
+  \url{http://rohsdb.cmb.usc.edu/GBshape/cgi-bin/hgTables?db=hg19&hgta_group=regulation&hgta_track=wgEncodeHaibMethylRrbs&hgta_table=wgEncodeHaibMethylRrbsBcbreast0203015BiochainSitesRep2&hgta_doSchema=describe+table+schema}
+
+  Bismark Cov format: \url{http://rnbeads.mpi-inf.mpg.de/data/RnBeads.pdf}
 }
 \examples{
 ####

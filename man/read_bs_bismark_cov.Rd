@@ -15,7 +15,7 @@ read_bs_bismark_cov(file, chr_discarded = NULL, is_GRanges = TRUE)
 data.frame object is returned.}
 }
 \value{
-a \code{\link[GenomicRanges]{GRanges}} object if \code{is_GRanges} is
+A \code{\link[GenomicRanges]{GRanges}} object if \code{is_GRanges} is
   TRUE, otherwise a \code{\link[data.table]{data.table}} object.
 
   The GRanges object contains two additional metadata columns: \itemize{
