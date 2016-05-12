@@ -1,13 +1,21 @@
-#' Read file containing Beatson \code{bed} formatted RNA-Seq data
+#' Read Beatson bed formatted RNA-Seq file
 #'
-#' \code{read_rna_beatson} reads a file containing promoter annotation
-#' data together with gene expression levels from RNA-Seq experiments using the
+#' \code{read_rna_beatson} reads a file containing promoter annotation data
+#' together with gene expression levels from RNA-Seq experiments using the
 #' \code{\link[data.table]{fread}} function.
 #'
 #' @inheritParams read_bs_encode_haib
 #'
-#' @return a \code{\link[GenomicRanges]{GRanges}} object if \code{is_GRanges}
-#'  is TRUE, otherwise a \code{\link[data.table]{data.table}} object.
+#' @return A \code{\link[GenomicRanges]{GRanges}} object if \code{is_GRanges} is
+#'   TRUE, otherwise a \code{\link[data.table]{data.table}} object.
+#'
+#'   The GRanges object contains three additional metadata columns: \itemize{
+#'   \item \code{ensembl_id}: Ensembl IDs of each gene promoter. \item
+#'   \code{gene_name}: Gene name. \item \code{gene_fpkm}: Expression level in
+#'   FPKM. } These columns can be accessed as follows:
+#'   \code{granges_object$ensembl_id}
+#'
+#' @author C.A.Kapourani \email{C.A.Kapourani@@ed.ac.uk}
 #'
 #' @seealso \code{\link{read_annot_beatson}}, \code{\link{read_bs_bismark_cov}}
 #'
@@ -48,6 +56,6 @@ read_rna_beatson <- function(file, chr_discarded = NULL, is_GRanges = TRUE){
                        gene_name  = rna_data$gene_name,
                        gene_fpkm  = rna_data$gene_fpkm)
   }
-  message("Done!\n")
+  message("Finished reading RNA-Seq file!\n")
   return(rna_data)
 }

@@ -2,7 +2,7 @@
 % Please edit documentation in R/read_rna_beatson.R
 \name{read_rna_beatson}
 \alias{read_rna_beatson}
-\title{Read file containing Beatson \code{bed} formatted RNA-Seq data}
+\title{Read Beatson bed formatted RNA-Seq file}
 \usage{
 read_rna_beatson(file, chr_discarded = NULL, is_GRanges = TRUE)
 }
@@ -15,12 +15,18 @@ read_rna_beatson(file, chr_discarded = NULL, is_GRanges = TRUE)
 data.frame object is returned.}
 }
 \value{
-a \code{\link[GenomicRanges]{GRanges}} object if \code{is_GRanges}
- is TRUE, otherwise a \code{\link[data.table]{data.table}} object.
+A \code{\link[GenomicRanges]{GRanges}} object if \code{is_GRanges} is
+  TRUE, otherwise a \code{\link[data.table]{data.table}} object.
+
+  The GRanges object contains three additional metadata columns: \itemize{
+  \item \code{ensembl_id}: Ensembl IDs of each gene promoter. \item
+  \code{gene_name}: Gene name. \item \code{gene_fpkm}: Expression level in
+  FPKM. } These columns can be accessed as follows:
+  \code{granges_object$ensembl_id}
 }
 \description{
-\code{read_rna_beatson} reads a file containing promoter annotation
-data together with gene expression levels from RNA-Seq experiments using the
+\code{read_rna_beatson} reads a file containing promoter annotation data
+together with gene expression levels from RNA-Seq experiments using the
 \code{\link[data.table]{fread}} function.
 }
 \examples{
@@ -28,6 +34,9 @@ data together with gene expression levels from RNA-Seq experiments using the
 rna_beatson_file <- system.file("extdata", "rna_beatson.bed", package = "processHTS")
 rna_beatson_data <- read_rna_beatson(file=rna_beatson_file, chr_discarded = "chrX", is_GRanges=TRUE)
 
+}
+\author{
+C.A.Kapourani \email{C.A.Kapourani@ed.ac.uk}
 }
 \seealso{
 \code{\link{read_annot_beatson}}, \code{\link{read_bs_bismark_cov}}

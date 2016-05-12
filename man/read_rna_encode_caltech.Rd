@@ -2,7 +2,7 @@
 % Please edit documentation in R/read_rna_encode_caltech.R
 \name{read_rna_encode_caltech}
 \alias{read_rna_encode_caltech}
-\title{Read file containing ENCODE Caltech \code{bed} formatted RNA-Seq data}
+\title{Read ENCODE Caltech bed formatted RNA-Seq file}
 \usage{
 read_rna_encode_caltech(file, chr_discarded = NULL, is_GRanges = TRUE)
 }
@@ -15,8 +15,15 @@ read_rna_encode_caltech(file, chr_discarded = NULL, is_GRanges = TRUE)
 data.frame object is returned.}
 }
 \value{
-a \code{\link[GenomicRanges]{GRanges}} object if \code{is_GRanges}
- is TRUE, otherwise a data.frame object.
+A \code{\link[GenomicRanges]{GRanges}} object if \code{is_GRanges} is
+  TRUE, otherwise a \code{\link[data.table]{data.table}} object.
+
+  The GRanges object contains four additional metadata columns: \itemize{
+  \item \code{ensembl_id}: Ensembl IDs of each gene promoter. \item
+  \code{gene_name}: Gene name. \item \code{gene_expr}: Expression level in
+  the format required by ENCODE. \item \code{gene_fpkm}: Expression level in
+  FPKM. } These columns can be accessed as follows:
+  \code{granges_object$ensembl_id}
 }
 \description{
 \code{read_rna_encode_caltech} reads a file containing promoter annotation
@@ -30,6 +37,9 @@ data together with gene expression levels from RNA-Seq experiments using the
 rnaseq_file <- system.file("extdata", "rnaseq.bed", package = "processHTS")
 rna_data <- read_rna_encode_caltech(file=rnaseq_file, is_GRanges=FALSE)
 
+}
+\author{
+C.A.Kapourani \email{C.A.Kapourani@ed.ac.uk}
 }
 \seealso{
 \code{\link{read_chrom_size}}, \code{\link{read_bs_encode_haib}}
