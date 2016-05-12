@@ -2,7 +2,7 @@
 #'
 #' \code{pool_bs_seq_rep} reads and pools replicate methylation data from BS-Seq
 #' experiments that are either in Encode RRBS or Bismark Cov format. Read the
-#' Important section below on when using this function.
+#' Important section below on when to use this function.
 #'
 #' @inheritParams preprocess_bs_seq
 #'
@@ -23,6 +23,8 @@
 #'   \url{http://rohsdb.cmb.usc.edu/GBshape/cgi-bin/hgTables?db=hg19&hgta_group=regulation&hgta_track=wgEncodeHaibMethylRrbs&hgta_table=wgEncodeHaibMethylRrbsBcbreast0203015BiochainSitesRep2&hgta_doSchema=describe+table+schema}
 #'
 #'   Bismark Cov format: \url{http://rnbeads.mpi-inf.mpg.de/data/RnBeads.pdf}
+#'
+#' @author C.A.Kapourani \email{C.A.Kapourani@@ed.ac.uk}
 #'
 #' @seealso \code{\link{read_bs_bismark_cov}},
 #'   \code{\link{read_bs_encode_haib}}, \code{\link{preprocess_bs_seq}}

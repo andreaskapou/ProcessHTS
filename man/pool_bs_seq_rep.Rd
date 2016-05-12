@@ -25,7 +25,7 @@ A \code{\link[GenomicRanges]{GRanges}} object. The GRanges object
 \description{
 \code{pool_bs_seq_rep} reads and pools replicate methylation data from BS-Seq
 experiments that are either in Encode RRBS or Bismark Cov format. Read the
-Important section below on when using this function.
+Important section below on when to use this function.
 }
 \section{Important}{
  Unless you want to create a different workflow when
@@ -53,6 +53,9 @@ bs_file2 <- system.file("extdata", "bism_rep2.bed", package = "processHTS")
 bs_files <- c(bs_file1, bs_file2)
 pool_data <- pool_bs_seq_rep(files=bs_files, file_format="bismark_cov")
 
+}
+\author{
+C.A.Kapourani \email{C.A.Kapourani@ed.ac.uk}
 }
 \seealso{
 \code{\link{read_bs_bismark_cov}},
