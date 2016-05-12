@@ -3,7 +3,7 @@
 #' \code{read_bs_bismark_cov} reads a file containing methylation data from
 #' BS-Seq experiments using the \code{\link[data.table]{fread}} function. The
 #' BS-Seq file should be in Bismark Cov format. Read the Important section below
-#' on when using this function.
+#' on when to use this function.
 #'
 #' @inheritParams read_bs_encode_haib
 #'
