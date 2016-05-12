@@ -42,6 +42,9 @@ bism_file <- system.file("extdata", "bism_rep1.bed", package = "processHTS")
 bs_data <- read_bs_bismark_cov(file = bism_file, is_GRanges = TRUE)
 
 }
+\author{
+C.A.Kapourani \email{C.A.Kapourani@ed.ac.uk}
+}
 \references{
 \url{http://rnbeads.mpi-inf.mpg.de/data/RnBeads.pdf}
 }

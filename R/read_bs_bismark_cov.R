@@ -21,9 +21,11 @@
 #'   is a helper function. Instead you should call the
 #'   \code{\link{preprocess_bs_seq}} function.
 #'
-#' @seealso \code{\link{pool_bs_seq_rep}}, \code{\link{preprocess_bs_seq}}
+#' @author C.A.Kapourani \email{C.A.Kapourani@@ed.ac.uk}
 #'
 #' @references \url{http://rnbeads.mpi-inf.mpg.de/data/RnBeads.pdf}
+#'
+#' @seealso \code{\link{pool_bs_seq_rep}}, \code{\link{preprocess_bs_seq}}
 #'
 #' @examples
 #' # Get the location of the bismark file
