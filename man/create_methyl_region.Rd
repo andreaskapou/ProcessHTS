@@ -49,14 +49,14 @@ A \code{methyl_region} object containing the following information:
   3rd column: Contains the methylated reads each CpG in the corresponding
   location.} } } \item{ \code{prom_ind}: A vector storing the corresponding
   promoter indices, so as to map each methylation region with its
-  corresponding gene promoter.} } The lengths of \code{prom_ind} and
-  \code{meth_data} should be the same.
+  corresponding gene promoter.} } The lengths of \code{meth_data} and
+  \code{prom_ind} should be the same.
 }
 \description{
 \code{create_methyl_region} creates methylation regions using BS-Seq and
-pre-processed annotated gene promoter regions. BS-Seq data give information
-for the methylation of CpGs individually, and promoter data are used to
-locate the TSS of each gene and its promoter region.
+annotated gene promoter regions. BS-Seq data give information for the
+methylation of CpGs individually, and annotated data are used to locate the
+TSS of each gene and its promoter region.
 }
 \examples{
 # Load the gene annotation example dataset
@@ -64,7 +64,15 @@ ann_data <- annot_data
 prom_reg <- create_prom_region(ann_data, upstream=-2000, downstream=2000)
 bs_data  <- rrbs_data
 
+# Create the meth_region object
 meth_regions <- create_methyl_region(bs_data, prom_reg)
+# Extract the promoter indices
+prom_indices <- meth_regions$prom_ind
+
+# Extract the methylated data list
+methylated_data <- meth_regions$meth_data
+# Get the 1st methylated region
+meth_reg <- methylated_data[[1]]
 
 }
 \author{
