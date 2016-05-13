@@ -14,17 +14,17 @@ process_diff_beatson(bs_contr_files, bs_treat_files, rna_contr_files,
 \item{bs_contr_files}{The name of the control BS-Seq '.bed' formatted files
 to read data values from.}
 
-\item{bs_treat_files}{The name of the treatment BS-Seq '.bed' formatted
-files to read data values from.}
+\item{bs_treat_files}{The name of the treatment BS-Seq '.bed' formatted files
+to read data values from.}
 
-\item{rna_contr_files}{The name of the control RNA-Seq '.bed' formatted
-files to read data values from.}
+\item{rna_contr_files}{The name of the control RNA-Seq '.bed' formatted files
+to read data values from.}
 
 \item{rna_treat_files}{The name of the treatment RNA-Seq '.bed' formatted
 files to read data values from.}
 
-\item{chrom_size_file}{Optional name of the file containing genome
-chromosome sizes}
+\item{chrom_size_file}{Optional name of the file containing genome chromosome
+sizes}
 
 \item{chr_discarded}{A vector with chromosome names to be discarded.}
 
@@ -54,31 +54,20 @@ this version, this parameter should be left to its default value.}
 }
 \value{
 A \code{diff_processHTS} object which contains among others the
- following information:
- \itemize{
-   \item{ \code{methyl_region}: A list containing the methylation regions,
-     where each each entry in the list consists of an L X 3 dimensional
-     matrix, where:
-     \enumerate{
-       \item{ 1st col: Contains the locations of the CpGs relative to TSS,
-         where the range (min, max) of possible values is given, by the
-         inputs fmin and fmax.
-       }
-       \item{ 2nd col: The total reads of the CpG in the corresponding
-         location.}
-       \item{ 3rd col: The methylated reads of the CpG in the corresponding
-         location.}
-     }
-   }
-   \item{ \code{prom_region}: A \code{\link[GenomicRanges]{GRanges}} object
-     containing corresponding annotated promoter regions for each entry of
-     the \code{methyl_region} list..
+  following information: \itemize{ \item{ \code{methyl_region}: A list
+  containing the methylation regions, where each each entry in the list
+  consists of an L X 3 dimensional matrix, where: \enumerate{ \item{ 1st col:
+  Contains the locations of the CpGs relative to TSS, where the range (min,
+  max) of possible values is given, by the inputs fmin and fmax. } \item{ 2nd
+  col: The total reads of the CpG in the corresponding location.} \item{ 3rd
+  col: The methylated reads of the CpG in the corresponding location.} } }
+  \item{ \code{prom_region}: A \code{\link[GenomicRanges]{GRanges}} object
+  containing corresponding annotated promoter regions for each entry of the
+  \code{methyl_region} list..
 
-   }
-   \item{ \code{rna_data}: A \code{\link[GenomicRanges]{GRanges}} object
-     containing the corresponding RNA-Seq data for each entry of the
-     \code{methyl_region} list.}
- }
+  } \item{ \code{rna_data}: A \code{\link[GenomicRanges]{GRanges}} object
+  containing the corresponding RNA-Seq data for each entry of the
+  \code{methyl_region} list.} }
 }
 \description{
 \code{process_diff_beatson} is a wrapper method ...

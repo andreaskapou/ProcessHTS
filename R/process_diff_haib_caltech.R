@@ -3,15 +3,15 @@
 #' \code{process_diff_haib_caltech} is a wrapper method ...
 #'
 #' @param bs_contr_files The name of the control BS-Seq '.bed' formatted files
-#'  to read data values from.
-#' @param bs_treat_files The name of the treatment BS-Seq '.bed' formatted
-#'  files to read data values from.
-#' @param rna_contr_files The name of the control RNA-Seq '.bed' formatted
-#'  files to read data values from.
+#'   to read data values from.
+#' @param bs_treat_files The name of the treatment BS-Seq '.bed' formatted files
+#'   to read data values from.
+#' @param rna_contr_files The name of the control RNA-Seq '.bed' formatted files
+#'   to read data values from.
 #' @param rna_treat_files The name of the treatment RNA-Seq '.bed' formatted
-#'  files to read data values from.
-#' @param chrom_size_file Optional name of the file containing genome
-#'  chromosome sizes
+#'   files to read data values from.
+#' @param chrom_size_file Optional name of the file containing genome chromosome
+#'   sizes
 #' @param chr_discarded A vector with chromosome names to be discarded.
 #' @param upstream Integer defining the length of bp upstream of TSS.
 #' @param downstream Integer defining the length of bp downstream of TSS.
@@ -20,31 +20,20 @@
 #' @inheritParams create_methyl_region
 #'
 #' @return A \code{diff_processHTS} object which contains among others the
-#'  following information:
-#'  \itemize{
-#'    \item{ \code{methyl_region}: A list containing the methylation regions,
-#'      where each each entry in the list consists of an L X 3 dimensional
-#'      matrix, where:
-#'      \enumerate{
-#'        \item{ 1st col: Contains the locations of the CpGs relative to TSS,
-#'          where the range (min, max) of possible values is given, by the
-#'          inputs fmin and fmax.
-#'        }
-#'        \item{ 2nd col: The total reads of the CpG in the corresponding
-#'          location.}
-#'        \item{ 3rd col: The methylated reads of the CpG in the corresponding
-#'          location.}
-#'      }
-#'    }
-#'    \item{ \code{prom_region}: A \code{\link[GenomicRanges]{GRanges}} object
-#'      containing corresponding annotated promoter regions for each entry of
-#'      the \code{methyl_region} list..
+#'   following information: \itemize{ \item{ \code{methyl_region}: A list
+#'   containing the methylation regions, where each each entry in the list
+#'   consists of an L X 3 dimensional matrix, where: \enumerate{ \item{ 1st col:
+#'   Contains the locations of the CpGs relative to TSS, where the range (min,
+#'   max) of possible values is given, by the inputs fmin and fmax. } \item{ 2nd
+#'   col: The total reads of the CpG in the corresponding location.} \item{ 3rd
+#'   col: The methylated reads of the CpG in the corresponding location.} } }
+#'   \item{ \code{prom_region}: A \code{\link[GenomicRanges]{GRanges}} object
+#'   containing corresponding annotated promoter regions for each entry of the
+#'   \code{methyl_region} list..
 #'
-#'    }
-#'    \item{ \code{rna_data}: A \code{\link[GenomicRanges]{GRanges}} object
-#'      containing the corresponding RNA-Seq data for each entry of the
-#'      \code{methyl_region} list.}
-#'  }
+#'   } \item{ \code{rna_data}: A \code{\link[GenomicRanges]{GRanges}} object
+#'   containing the corresponding RNA-Seq data for each entry of the
+#'   \code{methyl_region} list.} }
 #'
 #' @export
 process_diff_haib_caltech <- function(bs_contr_files, bs_treat_files,
@@ -56,34 +45,34 @@ process_diff_haib_caltech <- function(bs_contr_files, bs_treat_files,
                                  ignore_strand = FALSE, fmin = -1, fmax = 1){
 
   # Process control dataset
-  contr_data <- process_haib_caltech(bs_files        = bs_contr_files,
-                                     rna_files       = rna_contr_files,
-                                     chrom_size_file = chrom_size_file,
-                                     chr_discarded   = chr_discarded,
-                                     upstream        = upstream,
-                                     downstream      = downstream,
-                                     min_bs_cov      = min_bs_cov,
-                                     max_bs_cov      = max_bs_cov,
-                                     cpg_density     = cpg_density,
-                                     sd_thresh       = sd_thresh,
-                                     ignore_strand   = ignore_strand,
-                                     fmin            = fmin,
-                                     fmax            = fmax)
+  contr_data <- process_haib_caltech_wrap(bs_files        = bs_contr_files,
+                                          rna_files       = rna_contr_files,
+                                          chrom_size_file = chrom_size_file,
+                                          chr_discarded   = chr_discarded,
+                                          upstream        = upstream,
+                                          downstream      = downstream,
+                                          min_bs_cov      = min_bs_cov,
+                                          max_bs_cov      = max_bs_cov,
+                                          cpg_density     = cpg_density,
+                                          sd_thresh       = sd_thresh,
+                                          ignore_strand   = ignore_strand,
+                                          fmin            = fmin,
+                                          fmax            = fmax)
 
   # Process treatment dataset
-  treat_data <- process_haib_caltech(bs_files        = bs_treat_files,
-                                     rna_files       = rna_treat_files,
-                                     chrom_size_file = chrom_size_file,
-                                     chr_discarded   = chr_discarded,
-                                     upstream        = upstream,
-                                     downstream      = downstream,
-                                     min_bs_cov      = min_bs_cov,
-                                     max_bs_cov      = max_bs_cov,
-                                     cpg_density     = cpg_density,
-                                     sd_thresh       = sd_thresh,
-                                     ignore_strand   = ignore_strand,
-                                     fmin            = fmin,
-                                     fmax            = fmax)
+  treat_data <- process_haib_caltech_wrap(bs_files        = bs_treat_files,
+                                          rna_files       = rna_treat_files,
+                                          chrom_size_file = chrom_size_file,
+                                          chr_discarded   = chr_discarded,
+                                          upstream        = upstream,
+                                          downstream      = downstream,
+                                          min_bs_cov      = min_bs_cov,
+                                          max_bs_cov      = max_bs_cov,
+                                          cpg_density     = cpg_density,
+                                          sd_thresh       = sd_thresh,
+                                          ignore_strand   = ignore_strand,
+                                          fmin            = fmin,
+                                          fmax            = fmax)
 
   # Find overlaps between control and treatment data
   overlaps <- GenomicRanges::findOverlaps(query   = contr_data$rna_data,
