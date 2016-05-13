@@ -91,4 +91,7 @@ rnaseq_file <- system.file("extdata", "rnaseqH1hESC.bed", package = "processHTS"
 data <- process_haib_caltech_wrap(rrbs_file, rnaseq_file)
 
 }
+\author{
+C.A.Kapourani \email{C.A.Kapourani@ed.ac.uk}
+}
 

@@ -10,8 +10,10 @@
 #'   stored. Current version allows "\code{encode_rrbs}" or "\code{bismark_cov}"
 #'   formats.
 #' @param chr_discarded A vector with chromosome names to be discarded.
-#' @param min_bs_cov Minimum number of reads mapping to each CpG site.
-#' @param max_bs_cov Maximum number of reads mapping to each CpG site.
+#' @param min_bs_cov The minimum number of reads mapping to each CpG site. CpGs
+#'   with less reads will be considered as noise and will be discarded.
+#' @param max_bs_cov The maximum number of reads mapping to each CpG site. CpGs
+#'   with more reads will be considered as noise and will be discarded.
 #'
 #' @return A \code{\link[GenomicRanges]{GRanges}} object. The GRanges object
 #'   contains two additional metadata columns: \itemize{ \item

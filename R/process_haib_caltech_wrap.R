@@ -50,6 +50,8 @@
 #'   value for region location scaling.} \item{ \code{fmax}: Maximum range value
 #'   for region location scaling.} }
 #'
+#' @author C.A.Kapourani \email{C.A.Kapourani@@ed.ac.uk}
+#'
 #' @examples
 #' # Get the location of the files
 #' rrbs_file <- system.file("extdata", "rrbsH1hESC.bed", package = "processHTS")

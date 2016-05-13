@@ -17,9 +17,11 @@ formats.}
 
 \item{chr_discarded}{A vector with chromosome names to be discarded.}
 
-\item{min_bs_cov}{Minimum number of reads mapping to each CpG site.}
+\item{min_bs_cov}{The minimum number of reads mapping to each CpG site. CpGs
+with less reads will be considered as noise and will be discarded.}
 
-\item{max_bs_cov}{Maximum number of reads mapping to each CpG site.}
+\item{max_bs_cov}{The maximum number of reads mapping to each CpG site. CpGs
+with more reads will be considered as noise and will be discarded.}
 }
 \value{
 A \code{\link[GenomicRanges]{GRanges}} object. The GRanges object
