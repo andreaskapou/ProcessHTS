@@ -49,7 +49,7 @@
 #' @examples
 #' # Load the gene annotation example dataset
 #' ann_data <- annot_data
-#' prom_reg <- create_prom_region(ann_data, upstream=-2000, downstream=2000)
+#' prom_reg <- create_prom_region(ann_data, upstream=-10000, downstream=10000)
 #' bs_data  <- rrbs_data
 #'
 #' # Create the meth_region object
