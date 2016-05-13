@@ -4,7 +4,8 @@
 #' BS-Seq data. If a vector of files is given, these are considered as
 #' replicates and are pooled together. Finally, noisy reads are discarded.
 #'
-#' @param files A vector of filenames containing replicate experiments.
+#' @param files A vector of filenames containing replicate experiments. This can
+#'   also be just a single replicate.
 #' @param file_format A string denoting the file format that the BS-Seq data are
 #'   stored. Current version allows "\code{encode_rrbs}" or "\code{bismark_cov}"
 #'   formats.

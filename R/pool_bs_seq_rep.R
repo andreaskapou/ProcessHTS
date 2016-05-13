@@ -4,6 +4,7 @@
 #' experiments that are either in Encode RRBS or Bismark Cov format. Read the
 #' Important section below on when to use this function.
 #'
+#' @param files A vector of filenames containing replicate experiments.
 #' @inheritParams preprocess_bs_seq
 #'
 #' @return A \code{\link[GenomicRanges]{GRanges}} object. The GRanges object

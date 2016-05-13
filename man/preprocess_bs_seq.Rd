@@ -8,7 +8,8 @@ preprocess_bs_seq(files, file_format = "encode_rrbs", chr_discarded = NULL,
   min_bs_cov = 2, max_bs_cov = 1000)
 }
 \arguments{
-\item{files}{A vector of filenames containing replicate experiments.}
+\item{files}{A vector of filenames containing replicate experiments. This can
+also be just a single replicate.}
 
 \item{file_format}{A string denoting the file format that the BS-Seq data are
 stored. Current version allows "\code{encode_rrbs}" or "\code{bismark_cov}"
