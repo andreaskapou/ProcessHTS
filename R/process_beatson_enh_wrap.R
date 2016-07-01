@@ -83,11 +83,6 @@ process_beatson_enh_wrap <- function(bs_files, rna_files, enh_files,
     chrom_size <- NULL
   }
 
-  # Read RNA-Seq BED file
-  rna_data <- read_rna_beatson(file          = rna_files,
-                               chr_discarded = chr_discarded,
-                               is_GRanges    = TRUE)
-
   # Read enhancer data
   obj <- read_enh_beatson(enh_file = enh_files,
                           gene_file = rna_files,
